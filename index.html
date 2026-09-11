@@ -1,0 +1,451 @@
+<title>ปัญหาซ้ำ สายงานขาย 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#f2f5f4; --panel:#ffffff; --panel-2:#e9eeed;
+  --ink:#14201f; --ink-2:#3d4d4b; --muted:#6e807d;
+  --line:#d3dcda; --line-soft:#e3eae9;
+  --accent:#0e6b63; --accent-soft:#d9eae7;
+  --crit:#a8342c; --warn:#b4741a; --ok:#3f7a44;
+  --h0:2.55rem; --h1:1.55rem; --h2:1.12rem; --body:0.95rem; --small:0.8rem; --micro:0.7rem;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0d1514; --panel:#151f1e; --panel-2:#1c2726;
+    --ink:#e0e8e6; --ink-2:#b3c2bf; --muted:#7f918e;
+    --line:#2a3836; --line-soft:#212d2c;
+    --accent:#4fb3a6; --accent-soft:#16302d;
+    --crit:#e0796f; --warn:#d9a45c; --ok:#7fb886;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0d1514; --panel:#151f1e; --panel-2:#1c2726;
+  --ink:#e0e8e6; --ink-2:#b3c2bf; --muted:#7f918e;
+  --line:#2a3836; --line-soft:#212d2c;
+  --accent:#4fb3a6; --accent-soft:#16302d;
+  --crit:#e0796f; --warn:#d9a45c; --ok:#7fb886;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--ground); color:var(--ink);
+  font-family:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;
+  font-size:var(--body); font-weight:400; line-height:1.7;
+  margin:0; padding:0;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:40px 24px 96px;display:flex;flex-direction:column;gap:56px}
+h1,h2,h3{font-family:"Chakra Petch","IBM Plex Sans Thai",sans-serif;text-wrap:balance;margin:0;line-height:1.25}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:var(--micro);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:500}
+
+/* ---- masthead ---- */
+.mast{display:flex;flex-direction:column;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:22px}
+.mast h1{font-size:var(--h0);font-weight:700;letter-spacing:-.01em}
+.mast p{margin:0;color:var(--ink-2);max-width:62ch}
+.facts{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--line);background:var(--panel);margin-top:8px}
+.fact{flex:1 1 150px;padding:14px 18px;border-right:1px solid var(--line-soft)}
+.fact:last-child{border-right:0}
+.fact b{display:block;font-family:"Chakra Petch",sans-serif;font-size:1.7rem;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.fact span{font-size:var(--micro);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-family:"IBM Plex Mono",monospace}
+
+/* ---- sections ---- */
+section{display:flex;flex-direction:column;gap:20px}
+.sechead{display:flex;flex-direction:column;gap:6px;border-left:3px solid var(--accent);padding-left:14px}
+.sechead h2{font-size:var(--h1);font-weight:600}
+.sechead p{margin:0;color:var(--muted);font-size:var(--small);max-width:70ch}
+
+/* ---- matrix ---- */
+.scroll{overflow-x:auto;border:1px solid var(--line);background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:820px;font-size:var(--small)}
+thead th{
+  background:var(--panel-2);font-family:"Chakra Petch",sans-serif;font-weight:600;
+  font-size:var(--micro);letter-spacing:.04em;text-align:center;padding:10px 6px;
+  border-bottom:1px solid var(--line);color:var(--ink-2);vertical-align:bottom;
+}
+thead th.lead{text-align:left;width:38%;padding-left:16px}
+tbody td{border-bottom:1px solid var(--line-soft);padding:9px 6px;text-align:center;vertical-align:middle}
+tbody tr:last-child td{border-bottom:0}
+td.lead{text-align:left;padding-left:16px;line-height:1.45}
+td.lead b{font-weight:600;display:block}
+td.lead em{font-style:normal;color:var(--muted);font-size:var(--micro);font-family:"IBM Plex Mono",monospace;letter-spacing:.04em}
+.dot{display:inline-block;width:26px;height:26px;line-height:26px;border-radius:3px;font-family:"IBM Plex Mono",monospace;font-size:var(--micro);font-weight:500;font-variant-numeric:tabular-nums}
+.d3{background:var(--accent);color:var(--panel)}
+.d2{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent)}
+.d1{background:transparent;color:var(--muted);border:1px dashed var(--line)}
+.d0{color:var(--line)}
+td.cov{font-family:"IBM Plex Mono",monospace;font-weight:500;font-variant-numeric:tabular-nums;padding-right:14px;text-align:right;white-space:nowrap}
+.legend{display:flex;gap:20px;flex-wrap:wrap;font-size:var(--micro);color:var(--muted);font-family:"IBM Plex Mono",monospace;letter-spacing:.04em}
+.legend i{font-style:normal;display:inline-flex;align-items:center;gap:7px}
+
+/* ---- theme detail ---- */
+.themes{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.theme{display:grid;grid-template-columns:54px 1fr;gap:0 18px;border-bottom:1px solid var(--line);padding:22px 0}
+.rank{font-family:"Chakra Petch",sans-serif;font-size:1.5rem;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1.2}
+.tbody{display:flex;flex-direction:column;gap:10px}
+.theme h3{font-size:var(--h2);font-weight:600}
+.theme p{margin:0;color:var(--ink-2);max-width:76ch}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:"IBM Plex Mono",monospace;font-size:var(--micro);letter-spacing:.03em;padding:2px 8px;border:1px solid var(--line);color:var(--muted);border-radius:2px}
+.chip.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.quote{border-left:2px solid var(--line);padding:2px 0 2px 14px;color:var(--muted);font-size:var(--small);display:flex;flex-direction:column;gap:4px}
+.quote span::before{content:"“"}
+.quote span::after{content:"”"}
+.root{background:var(--panel);border:1px solid var(--line);padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.root em{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:var(--micro);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+/* ---- dept ---- */
+.depts{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.dept{background:var(--panel);padding:20px;display:flex;flex-direction:column;gap:12px}
+.dept header{display:flex;flex-direction:column;gap:3px}
+.dept h3{font-size:var(--h2);font-weight:600}
+.dept .who{font-family:"IBM Plex Mono",monospace;font-size:var(--micro);color:var(--muted);letter-spacing:.04em}
+.dept ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+.dept li{display:flex;gap:9px;font-size:var(--small);line-height:1.55;color:var(--ink-2)}
+.sev{flex:0 0 3px;border-radius:2px;margin-top:5px;height:auto;align-self:stretch}
+.s3{background:var(--crit)} .s2{background:var(--warn)} .s1{background:var(--ok)}
+.own{margin-top:auto;padding-top:10px;border-top:1px dashed var(--line);font-size:var(--micro);font-family:"IBM Plex Mono",monospace;color:var(--muted);letter-spacing:.03em}
+
+/* ---- actions ---- */
+.acts{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line)}
+.act{background:var(--panel);display:grid;grid-template-columns:1fr 230px;gap:0}
+.act .l{padding:18px 20px;display:flex;flex-direction:column;gap:7px;border-right:1px solid var(--line-soft)}
+.act .r{padding:18px 20px;display:flex;flex-direction:column;gap:10px;background:var(--panel-2)}
+.act h3{font-size:var(--h2);font-weight:600}
+.act p{margin:0;color:var(--ink-2);font-size:var(--small)}
+.metric{display:flex;flex-direction:column;gap:2px}
+.metric em{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:var(--micro);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.metric b{font-family:"Chakra Petch",sans-serif;font-weight:600;font-size:0.98rem;font-variant-numeric:tabular-nums}
+.metric b.to{color:var(--accent)}
+@media (max-width:640px){
+  :root{--h0:1.9rem;--h1:1.3rem}
+  .act{grid-template-columns:1fr}
+  .act .l{border-right:0;border-bottom:1px solid var(--line-soft)}
+  .theme{grid-template-columns:1fr;gap:8px}
+}
+footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:var(--micro);font-family:"IBM Plex Mono",monospace;letter-spacing:.04em;line-height:1.8}
+</style>
+
+<div class="wrap">
+
+<div class="mast">
+  <div class="eyebrow">Work Review · สายงานขาย 1 · ก.ย. 2569</div>
+  <h1>ปัญหาซ้ำ สายงานขาย 1</h1>
+  <p>สรุปจากแบบฟอร์มทบทวนงานรายบุคคล 26 ชุด ใน 6 แผนก — อ่านจากข้อ 4 (ปัญหา 3 อันดับ), ข้อ 5 (งานที่กินเวลาแต่คุณค่าต่ำ) และข้อ 6 (สิ่งที่อยากเปลี่ยน) แล้วจับปัญหาที่พูดตรงกันข้ามแผนกออกมา</p>
+  <div class="facts">
+    <div class="fact"><b>26</b><span>ผู้กรอก</span></div>
+    <div class="fact"><b>6</b><span>แผนก</span></div>
+    <div class="fact"><b>77</b><span>ปัญหาที่ระบุ</span></div>
+    <div class="fact"><b>69</b><span>งานที่เรียกว่าสูญเปล่า</span></div>
+    <div class="fact"><b>11</b><span>ปัญหาซ้ำข้ามแผนก</span></div>
+  </div>
+</div>
+
+<section>
+  <div class="sechead">
+    <h2>แผนผังปัญหาซ้ำ × แผนก</h2>
+    <p>ตัวเลขในช่อง = จำนวนคนในแผนกนั้นที่เขียนถึงปัญหาเดียวกัน ยิ่งแถวไหนมีช่องเข้มกระจายหลายแผนก ยิ่งแปลว่าเป็นปัญหาของระบบ ไม่ใช่ของคนหรือของแผนกใดแผนกหนึ่ง</p>
+  </div>
+  <div class="scroll">
+  <table>
+    <thead>
+      <tr>
+        <th class="lead">ปัญหาที่พูดตรงกัน</th>
+        <th>DMS<br>ขายในปท.</th><th>FSC</th><th>ขายต่างปท.<br>EPA</th><th>ประสานงาน<br>+Shipping</th><th>คลัง<br>โลจิสติกส์</th><th>การตลาด<br>ออนไลน์</th>
+        <th>ครอบคลุม</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="lead"><b>รอข้อมูลจากแผนกอื่นโดยไม่มีกำหนดตอบ</b><em>ต้องใช้คนไล่ตามแทนระบบ</em></td>
+        <td><span class="dot d1">1</span></td><td><span class="dot d3">4</span></td><td><span class="dot d3">4</span></td><td><span class="dot d3">5</span></td><td><span class="dot d3">4</span></td><td><span class="dot d1">1</span></td><td class="cov">6/6 · 19 คน</td></tr>
+      <tr><td class="lead"><b>Rework — แก้งานเดิมซ้ำ</b><em>ข้อมูลตั้งต้นไม่ครบ หรือเปลี่ยนหลังเริ่มงาน</em></td>
+        <td><span class="dot d1">1</span></td><td><span class="dot d2">3</span></td><td><span class="dot d2">2</span></td><td><span class="dot d3">5</span></td><td><span class="dot d3">5</span></td><td><span class="dot d0">·</span></td><td class="cov">5/6 · 16 คน</td></tr>
+      <tr><td class="lead"><b>ข้อมูลกระจายหลายไฟล์ หลายไลน์กลุ่ม</b><em>ไม่มีแหล่งข้อมูลกลางชุดเดียว</em></td>
+        <td><span class="dot d1">1</span></td><td><span class="dot d2">3</span></td><td><span class="dot d3">5</span></td><td><span class="dot d2">3</span></td><td><span class="dot d2">3</span></td><td><span class="dot d0">·</span></td><td class="cov">5/6 · 15 คน</td></tr>
+      <tr><td class="lead"><b>Supply ไม่ตรง Demand</b><em>ของออกไม่ตรงฐานออเดอร์ / จัดสรรเนื้อไม่พอ</em></td>
+        <td><span class="dot d3">4</span></td><td><span class="dot d2">2</span></td><td><span class="dot d1">1</span></td><td><span class="dot d0">·</span></td><td><span class="dot d1">1</span></td><td><span class="dot d0">·</span></td><td class="cov">4/6 · 8 คน</td></tr>
+      <tr><td class="lead"><b>งานด่วนแทรก ทำให้แผนทั้งวันพัง</b><em>แจ้งเย็นขอพรุ่งนี้เช้า</em></td>
+        <td><span class="dot d1">1</span></td><td><span class="dot d1">1</span></td><td><span class="dot d0">·</span></td><td><span class="dot d3">4</span></td><td><span class="dot d1">1</span></td><td><span class="dot d0">·</span></td><td class="cov">4/6 · 7 คน</td></tr>
+      <tr><td class="lead"><b>รออนุมัติหลายขั้น</b><em>ไม่มีเกณฑ์เขียนไว้ว่าเรื่องใดจบที่ระดับใด</em></td>
+        <td><span class="dot d0">·</span></td><td><span class="dot d2">2</span></td><td><span class="dot d3">4</span></td><td><span class="dot d0">·</span></td><td><span class="dot d0">·</span></td><td><span class="dot d1">1</span></td><td class="cov">3/6 · 7 คน</td></tr>
+      <tr><td class="lead"><b>ประชุมถี่และยาว กินเวลาที่ควรได้ขาย</b><em>ส่วนใหญ่เป็นการรายงานตัวเลข</em></td>
+        <td><span class="dot d1">1</span></td><td><span class="dot d2">3</span></td><td><span class="dot d2">2</span></td><td><span class="dot d0">·</span></td><td><span class="dot d0">·</span></td><td><span class="dot d0">·</span></td><td class="cov">3/6 · 6 คน</td></tr>
+      <tr><td class="lead"><b>Scoreboard / รายงาน คีย์มือย้อนหลัง</b><em>ข้อมูลมีในระบบอยู่แล้ว แต่ต้องพิมพ์ซ้ำ</em></td>
+        <td><span class="dot d0">·</span></td><td><span class="dot d2">2</span></td><td><span class="dot d2">3</span></td><td><span class="dot d0">·</span></td><td><span class="dot d1">1</span></td><td><span class="dot d0">·</span></td><td class="cov">3/6 · 6 คน</td></tr>
+      <tr><td class="lead"><b>เอกสารเปิดลูกค้าใหม่ / ขอเครดิต ซับซ้อน</b><em>ลูกค้าถอยก่อนเปิดบัญชีเสร็จ</em></td>
+        <td><span class="dot d0">·</span></td><td><span class="dot d2">2</span></td><td><span class="dot d1">1</span></td><td><span class="dot d1">1</span></td><td><span class="dot d0">·</span></td><td><span class="dot d0">·</span></td><td class="cov">3/6 · 4 คน</td></tr>
+      <tr><td class="lead"><b>คุณภาพ / อายุสินค้า ทำให้ลูกค้า Complain</b><em>เสื่อมสภาพ อุณหภูมิ shelf life</em></td>
+        <td><span class="dot d2">3</span></td><td><span class="dot d0">·</span></td><td><span class="dot d0">·</span></td><td><span class="dot d0">·</span></td><td><span class="dot d2">2</span></td><td><span class="dot d0">·</span></td><td class="cov">2/6 · 5 คน</td></tr>
+      <tr><td class="lead"><b>จัด-จ่ายสินค้าผิด / ไม่ครบออเดอร์</b><em>Impact 5 แต่ยังไม่มีระบบป้องกัน</em></td>
+        <td><span class="dot d0">·</span></td><td><span class="dot d0">·</span></td><td><span class="dot d0">·</span></td><td><span class="dot d0">·</span></td><td><span class="dot d3">5</span></td><td><span class="dot d0">·</span></td><td class="cov">1/6 · 5 คน</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="legend">
+    <i><span class="dot d3">4</span> 4 คนขึ้นไป</i>
+    <i><span class="dot d2">2</span> 2–3 คน</i>
+    <i><span class="dot d1">1</span> 1 คน</i>
+    <i><span class="dot d0">·</span> ไม่มีใครเขียนถึง</i>
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <h2>5 ปัญหาซ้ำที่ควรแก้ที่ระบบ ไม่ใช่ที่คน</h2>
+    <p>เรียงตามจำนวนแผนกที่เจอปัญหาเดียวกัน — ทุกข้อมีคนเขียนถึงจากอย่างน้อย 3 แผนก ซึ่งแปลว่าถ้าแก้ทีละแผนก จะแก้ไม่หาย</p>
+  </div>
+  <div class="themes">
+
+    <article class="theme">
+      <div class="rank">01</div>
+      <div class="tbody">
+        <h3>รอข้อมูลจากแผนกอื่นโดยไม่มีกำหนดเวลาตอบกลับ</h3>
+        <div class="chips"><span class="chip on">DMS</span><span class="chip on">FSC</span><span class="chip on">ขายต่างประเทศ</span><span class="chip on">ประสานงานขาย</span><span class="chip on">คลัง/โลจิสติกส์</span><span class="chip on">การตลาดออนไลน์</span></div>
+        <p>ปัญหาเดียวที่ครบทั้ง 6 แผนก และเป็นตัวป้อนให้ปัญหาอีกหลายข้อ งานถูกขอผ่านไลน์กลุ่มซึ่งไม่มีเลขงาน ไม่มีเจ้าของ ไม่มีสถานะ คนขอจึงต้องเป็นคนไล่ตามเอง เวลาที่หายไปกับการ “ทวง” ไม่ได้เพิ่มคุณค่าให้งานเลย</p>
+        <div class="quote">
+          <span>Cal container ต้องรอ RD ทุกวัน / NPD เกิน leadtime จนหลุด 4–5 วันต่อสัปดาห์ / CS-LOAD โหลดนานและโหลดผิด 2–3 วันต่อสัปดาห์ ทำให้ฝ่ายขายต้องใช้คนไล่ตามแทนระบบ<b> — ผจก.ฝ่ายขายต่างประเทศ</b></span>
+          <span>เป็นตัวกลางส่งต่อคำถามระหว่างทีมกับแผนกอื่น เราไม่ได้เพิ่มข้อมูลใหม่ให้เรื่องนั้นเลย แค่ถามต่อและตามต่อ แต่ถ้าไม่ทำ เรื่องจะไม่เดิน — 1–1.5 ชม./วัน<b> — ผจก.ฝ่ายขายต่างประเทศ</b></span>
+          <span>ต้องเป็นคนติดตามงานแผนกอื่นด้วยตัวเองหลายส่วน — 1–1.5 ชม./วัน<b> — หัวหน้าทีมขายต่างประเทศ</b></span>
+          <span>คอยทวงถามผ่าน Line หรือโทรตามทีละสาย<b> — เจ้าหน้าที่คลังและโลจิสติกส์</b></span>
+          <span>การตลาดยังต้องตอบลูกค้าในไลน์ โดยคำถามบางอย่างไม่ได้รู้ข้อมูล ต้องสอบถามจากประสานงานขาย เกิดการทำงานซ้ำซ้อน<b> — รักษาการ ผจก.การตลาดออนไลน์</b></span>
+        </div>
+        <div class="root"><em>รากของปัญหา</em>ไม่มี SLA ระหว่างแผนก และช่องทางขอ-รับงานไม่ใช่ระบบที่ติดตามสถานะได้</div>
+      </div>
+    </article>
+
+    <article class="theme">
+      <div class="rank">02</div>
+      <div class="tbody">
+        <h3>Rework — แก้งานเดิมซ้ำเพราะข้อมูลตั้งต้นไม่ครบหรือเปลี่ยนกลางทาง</h3>
+        <div class="chips"><span class="chip on">DMS</span><span class="chip on">FSC</span><span class="chip on">ขายต่างประเทศ</span><span class="chip on">ประสานงานขาย</span><span class="chip on">คลัง/โลจิสติกส์</span><span class="chip">การตลาดออนไลน์</span></div>
+        <p>ต้นทางส่งข้อมูลไม่ครบ หรือเปลี่ยนหลังงานเริ่มไปแล้ว ปลายทางจึงต้องทำใหม่ทั้งชุด ที่ประสานงานขายและคลัง เกือบทุกคนเขียนถึงเรื่องนี้ และเกือบทุกคนบอกเหมือนกันว่าไม่มีจุดตรวจ (checklist / final confirm) ก่อนเริ่มงาน</p>
+        <div class="quote">
+          <span>การ Rev. เปลี่ยน Booking ของเอกสารตู้ที่ทำเสร็จแล้ว ต้องทำเอกสารใหม่ทั้งหมด — ตู้ 1 Item 30 นาที, ตู้ 2–3 Items 50 นาที ขึ้นไป, 3–4 ครั้ง/สัปดาห์<b> — ผู้เชี่ยวชาญเอกสารส่งออก</b></span>
+          <span>ตรวจงานซ้ำในจุดที่ผิดซ้ำเดิม เป็นความผิดพลาดชุดเดิมที่กลับมาทุกสัปดาห์ เพราะแก้ที่ชิ้นงาน ไม่ได้แก้ที่ต้นทาง — 1 ชม./วัน<b> — ผจก.ฝ่ายขายต่างประเทศ</b></span>
+          <span>ตรวจงานที่ทีมส่งมาทุกรายการ เพราะยังไม่มีเช็คลิสต์ส่งมอบ — 2–3 ชม./วัน<b> — หัวหน้าทีมขายต่างประเทศ</b></span>
+          <span>งาน Rework — สินค้าค้าง stock / ลูกค้าไม่รับสินค้า / สินค้าหมดอายุการจัดเก็บ — มากกว่า 3 ชม.<b> — ผู้ชำนาญการคลังสินค้า DMC</b></span>
+          <span>แก้ปัญหาเดิมที่เกิดซ้ำ แต่ยังไม่มีระบบป้องกัน — 1–2 ชม./ครั้ง<b> — รักษาการคลังและโลจิสติกส์</b></span>
+        </div>
+        <div class="root"><em>รากของปัญหา</em>ไม่มีนิยามร่วมว่า “ส่งงานถือว่าเสร็จเมื่อไหร่” และไม่มีการป้อนกลับคุณภาพงานไปที่ต้นทาง จึงแก้ที่ชิ้นงานทุกครั้ง</div>
+      </div>
+    </article>
+
+    <article class="theme">
+      <div class="rank">03</div>
+      <div class="tbody">
+        <h3>ข้อมูลชุดเดียวกันกระจายหลายไฟล์ หลายไลน์กลุ่ม</h3>
+        <div class="chips"><span class="chip on">DMS</span><span class="chip on">FSC</span><span class="chip on">ขายต่างประเทศ</span><span class="chip on">ประสานงานขาย</span><span class="chip on">คลัง/โลจิสติกส์</span><span class="chip">การตลาดออนไลน์</span></div>
+        <p>ราคา ต้นทุน ประวัติเสนอราคา สต็อก NPD และสถานะตู้ ถูกเก็บแยกเป็นไฟล์ตามครั้งและตามคน ค้นได้แค่ด้วย keyword ผลคือเวลาที่ควรใช้ตัดสินใจ หมดไปกับการรวบรวมข้อมูลก่อนตัดสินใจ และงานเดียวกันถูกเช็คซ้ำหลายด่าน</p>
+        <div class="quote">
+          <span>ข้อมูลในการทำ Offer กระจายอยู่หลายที่ เปรียบเทียบใช้เวลานาน — อยากเปลี่ยนเป็นข้อมูลที่เก็บเป็น data ค้นหาได้<b> — เจ้าหน้าที่ขายต่างประเทศ</b></span>
+          <span>ข้อมูลชุดเดียวกันกระจายอยู่หลายที่ เช่น NPD ที่มีหลายชีท ทำให้ต้องเปิดรวบใหม่ทุกครั้งที่ใช้ — 30 นาที–1 ชม./วัน<b> — หัวหน้าทีมขายต่างประเทศ</b></span>
+          <span>การบันทึกข้อมูล SB หรือ ผมว.รายใหม่ หลายไฟล์ หลายอัน และบันทึกด้วยมือ — 30 นาที<b> — รักษาการ ผจก. FSC</b></span>
+          <span>ไฟล์สต็อกสินค้าฟรีสไม่ตรง ทำให้การจัดขายต้องเช็คซ้ำ เป็นการทำงานซ้ำ<b> — รักษาการ ผจก.ขายภายในประเทศ</b></span>
+          <span>ไม่อยากทำงานที่ต้องเช็คข้อมูลซ้ำหลายช่องทาง<b> — ผจก.ประสานงานขายต่างประเทศ</b></span>
+        </div>
+        <div class="root"><em>รากของปัญหา</em>ข้อมูลถูกออกแบบให้ “ใช้ครั้งเดียว” ไม่ได้ออกแบบให้ใช้ซ้ำ จึงไม่มีฐานข้อมูลกลางที่ค้นด้วยลูกค้า สินค้า ตลาด และช่วงเวลาได้</div>
+      </div>
+    </article>
+
+    <article class="theme">
+      <div class="rank">04</div>
+      <div class="tbody">
+        <h3>รออนุมัติหลายขั้น โดยไม่มีเกณฑ์ว่าเรื่องใดจบที่ระดับใด</h3>
+        <div class="chips"><span class="chip">DMS</span><span class="chip on">FSC</span><span class="chip on">ขายต่างประเทศ</span><span class="chip">ประสานงานขาย</span><span class="chip">คลัง/โลจิสติกส์</span><span class="chip on">การตลาดออนไลน์</span></div>
+        <p>เข้มข้นที่สุดในฝ่ายขายต่างประเทศ — ผู้จัดการฝ่ายระบุเองว่าทั้งทีม 8 คน มี 7 คนเขียนเรื่องนี้ตรงกัน รวมถึงน้องฝึกงานที่เพิ่งเข้ามา และเรื่องเดียวกันยังโผล่ที่ FSC (รออนุมัติราคา) และการตลาดออนไลน์ (รออนุมัติโปรโมชั่น) ด้วย</p>
+        <div class="quote">
+          <span>ขั้นตอนอนุมัติสองชั้นทำให้ทั้งทีมต้องรอ — ไม่มีเกณฑ์มอบอำนาจที่เขียนไว้ล่วงหน้า จึงต้องขออนุมัติเกือบทุกเรื่อง งานค้างข้ามวัน ตอบลูกค้าช้าลง และเสียโอกาสในดีลที่แข่งด้านเวลา<b> — ผจก.ฝ่ายขายต่างประเทศ (Impact 5 · ความถี่ 5)</b></span>
+          <span>รออนุมัติผ่านสองขั้น งานหยุดรอทั้งที่บางเรื่องมองว่าไม่จำเป็นต้องขอ — 30 นาที–1 ชม./วัน<b> — หัวหน้าทีมขายต่างประเทศ</b></span>
+          <span>รอ Approve สำหรับการเสนอราคา ที่ใช้เวลานานเกินไปในบางครั้ง — 2–3 ชม.<b> — เจ้าหน้าที่ขาย FSC</b></span>
+          <span>การ Approve promotion ช้า ทำให้ต้องเร่งงานส่วนอื่น และอาจหลุดรายละเอียด — รอถึง 1 สัปดาห์<b> — รักษาการ ผจก.การตลาดออนไลน์</b></span>
+        </div>
+        <div class="root"><em>รากของปัญหา</em>มีการตกลงกันแล้วบางเรื่องว่าไม่ต้องขออนุมัติ แต่ยังไม่ได้เขียนเป็นเกณฑ์ คนจึงเลือกทางปลอดภัยคือขอทุกเรื่อง</div>
+      </div>
+    </article>
+
+    <article class="theme">
+      <div class="rank">05</div>
+      <div class="tbody">
+        <h3>ประชุมถี่และยาว กับ Scoreboard ที่ยังคีย์มือ</h3>
+        <div class="chips"><span class="chip on">DMS</span><span class="chip on">FSC</span><span class="chip on">ขายต่างประเทศ</span><span class="chip">ประสานงานขาย</span><span class="chip on">คลัง/โลจิสติกส์</span><span class="chip">การตลาดออนไลน์</span></div>
+        <p>สองเรื่องนี้มาคู่กันเสมอ ประชุมส่วนใหญ่เป็นการไล่รายงานตัวเลข ส่วนตัวเลขนั้นก็มาจากการพิมพ์มือย้อนหลังทั้งที่ข้อมูลเกิดในระบบงานอยู่แล้ว เวลาที่หายไปคือช่วงเช้าที่ควรได้ออกไปขาย</p>
+        <div class="quote">
+          <span>ประชุมที่เป็นการรายงานตัวเลข — ตัวเลขและสถานะส่งเป็นรายงานล่วงหน้าได้ ไม่จำเป็นต้องใช้เวลาทุกคนในห้องมาไล่ฟัง — 1–2 ชม./วัน<b> — ผจก.ฝ่ายขายต่างประเทศ</b></span>
+          <span>ประชุมที่ยาวและไม่กระชับ ลงรายละเอียดยิบย่อยที่เกี่ยวกับคนไม่กี่คน — 1–1.5 ชม./วัน<b> — หัวหน้าทีมขายต่างประเทศ</b></span>
+          <span>ประชุมทุก Week นอกเหนือจาก 4DX และ Conf. กับลูกค้า บางครั้งใช้เวลา 2–3 ชั่วโมง ควรปรับเป็น 2 สัปดาห์/ครั้ง<b> — เจ้าหน้าที่ขาย FSC</b></span>
+          <span>คีย์ Scoreboard และบันทึกย้อนหลังด้วยมือ ข้อมูลเกิดขึ้นในระบบงานอยู่แล้ว แต่ยังต้องมาพิมพ์ซ้ำอีกรอบ — 30 นาที/วัน<b> — ผจก.ฝ่ายขายต่างประเทศ</b></span>
+          <span>เดิมมีการปรับเปลี่ยน SB ค่อนข้างบ่อยและค่อนข้างเยอะ — 20 นาที<b> — เจ้าหน้าที่ขาย FSC</b></span>
+        </div>
+        <div class="root"><em>รากของปัญหา</em>ประชุมถูกใช้เป็นเครื่องมือเก็บสถานะ แทนที่จะใช้ตัดสินใจ เพราะสถานะไม่ไหลเข้าระบบเอง</div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <h2>แยกตามแผนก</h2>
+    <p>ปัญหาเด่นของแต่ละแผนก และตัวที่ซ้ำกับแผนกอื่น — แถบสีซ้ายบอกระดับผลกระทบที่ผู้กรอกให้เอง</p>
+  </div>
+  <div class="depts">
+
+    <div class="dept">
+      <header><h3>DMS — ขายภายในประเทศ</h3><div class="who">5 คน · รักษาการ ผจก. 2 · เจ้าหน้าที่ขาย 3</div></header>
+      <ul>
+        <li><i class="sev s3"></i><div><b>ฐานออเดอร์ไม่ cover ปริมาณไก่เข้าเชือดต่อวัน</b> — เกิดสินค้า No Order ต้องเร่งหาที่ระบายในวัน เจ้าหน้าที่ขายรายหนึ่งใช้เวลา 3 ชม./วัน กับเรื่องนี้อย่างเดียว (4 ใน 5 คน)</div></li>
+        <li><i class="sev s3"></i><div><b>คุณภาพและอายุสินค้า</b> — ลูกค้า complain ซ้ำ ผู้กรอกรายหนึ่งให้ Impact 5 ความถี่ 5 “เสนอขายด้วยความมั่นใจแต่พบปัญหาคุณภาพซ้ำ”</div></li>
+        <li><i class="sev s2"></i><div><b>เวลาหมดไปกับโทรตามลูกค้าเดิม</b> — 1–2 ชม./วัน ทำให้ไม่ได้โฟกัสหาลูกค้าใหม่ (3 ใน 5 คน)</div></li>
+        <li><i class="sev s1"></i><div><b>ไฟล์สต็อกฟรีสไม่ตรง ต้องเช็คซ้ำ</b> + ประชุมถี่เกินไปบางสัปดาห์ 1–2 ชม./วัน</div></li>
+      </ul>
+      <div class="own">ซ้ำกับแผนกอื่น: Supply≠Demand · คุณภาพสินค้า · ข้อมูลไม่ตรง · ประชุมถี่</div>
+    </div>
+
+    <div class="dept">
+      <header><h3>FSC — Food Supply Chain</h3><div class="who">5 คน · รักษาการ ผจก. 2 · เจ้าหน้าที่ขาย 3</div></header>
+      <ul>
+        <li><i class="sev s3"></i><div><b>เอกสารเปิดหน้าบัญชี/ขอเครดิตลูกค้าใหม่ซับซ้อนเกินไป</b> — เจ้าหน้าที่ขาย FSC ให้ Impact 5 “ลูกค้ามองว่าซับซ้อนเกินไป เสียโอกาสซื้อ-ขาย”</div></li>
+        <li><i class="sev s3"></i><div><b>ทำราคา NPD ใช้เวลานานมาก</b> — ไฟล์ต้นทุนหลาย sheet ย่อย ลิงก์สูตรพลาดได้ ทำให้เวลาติดต่อลูกค้ารายใหม่ลดลง</div></li>
+        <li><i class="sev s2"></i><div><b>ประชุม + ปรับ Scoreboard ถี่เกินไป</b> — 3 ใน 5 คนเขียนตรงกัน ขอให้ปรับเป็น 2 สัปดาห์/ครั้ง</div></li>
+        <li><i class="sev s2"></i><div><b>จัดสรรเนื้อไม่พอต่อลูกค้าฐาน</b> และไฟล์จัดสรรขึ้นว่ามีสต็อกแต่จริงเสนอไม่ได้ ต้องประสานซ้ำหลายฝ่าย</div></li>
+      </ul>
+      <div class="own">ซ้ำกับแผนกอื่น: รอข้อมูล · Rework · ข้อมูลกระจาย · รออนุมัติ · ประชุม · Scoreboard</div>
+    </div>
+
+    <div class="dept">
+      <header><h3>ขายต่างประเทศ / EPA</h3><div class="who">5 คน · ผจก.ฝ่าย 1 · หัวหน้าทีม 1 · เจ้าหน้าที่ขาย 3</div></header>
+      <ul>
+        <li><i class="sev s3"></i><div><b>อนุมัติสองชั้นเป็นคอขวดของทั้งทีม</b> — Impact 5 ความถี่ 5 ผู้จัดการฝ่ายระบุว่า 7 ใน 8 คนในทีมเขียนเรื่องนี้ตรงกัน</div></li>
+        <li><i class="sev s3"></i><div><b>รอ RD / CS-LOAD โดยไม่มี SLA</b> — Cal container รอทุกวัน, NPD หลุด leadtime 4–5 วัน/สัปดาห์, CS-LOAD ผิด 2–3 วัน/สัปดาห์</div></li>
+        <li><i class="sev s3"></i><div><b>ปริมาณงานไม่สัมพันธ์กับกำลังคน</b> — หัวหน้าทีมขายต่างประเทศ: งานที่ถูกตัดออกก่อนเสมอคือลูกค้าใหม่และการปรับปรุงงาน ซึ่งเป็นงานที่สร้างการเติบโต</div></li>
+        <li><i class="sev s2"></i><div><b>ทำงานผ่านไลน์กลุ่มมากเกินไป</b> — เจ้าหน้าที่ขายต่างประเทศขอให้ Stop; ข้อมูล Offer เก่าค้นยาก เก็บเป็น data เฉพาะคน</div></li>
+      </ul>
+      <div class="own">ซ้ำกับแผนกอื่น: รออนุมัติ · รอข้อมูล · ข้อมูลกระจาย · Scoreboard · ประชุม</div>
+    </div>
+
+    <div class="dept">
+      <header><h3>ประสานงานขายต่างประเทศ + Shipping Document</h3><div class="who">5 คน · ผจก.แผนก 2 · ผู้เชี่ยวชาญ/เจ้าหน้าที่ 3</div></header>
+      <ul>
+        <li><i class="sev s3"></i><div><b>Rework เอกสารทั้งชุด — ทุกคนเขียนถึง</b> ร.9, SI, HC, CO, ใบขน, SC, PI ต้องทำใหม่เมื่อ Booking เปลี่ยน 3–4 ครั้ง/สัปดาห์</div></li>
+        <li><i class="sev s3"></i><div><b>ข้อมูลตั้งต้นมาไม่ครบ/ไม่เคลียร์</b> — Document Instruction ลูกค้าใหม่, เงื่อนไขชำระเงินที่ยังไม่จบตั้งแต่ปิดการขาย, ประเภทสินค้าในระบบไม่ถูกต้อง</div></li>
+        <li><i class="sev s3"></i><div><b>งานด่วนแทรกใกล้ ETD</b> — “ทีมโหลดแจ้งเย็น ขอพรุ่งนี้ก่อนเที่ยง” Impact 5 ทั้งแผนกได้รับผลกระทบ</div></li>
+        <li><i class="sev s2"></i><div><b>ตรวจข้อมูลเดิมซ้ำด้วยสายตา</b> — 30 นาที/ชุด, ข้อมูลหน้า DLD กับหน้า SO ยังไม่เชื่อมกัน</div></li>
+      </ul>
+      <div class="own">ซ้ำกับแผนกอื่น: Rework · รอข้อมูล · งานด่วนแทรก · ข้อมูลกระจาย</div>
+    </div>
+
+    <div class="dept">
+      <header><h3>คลังสินค้าและโลจิสติกส์ / DMC</h3><div class="who">6 คน · ผจก.ฝ่าย 1 · รักษาการ/ผู้ชำนาญการ 3 · เจ้าหน้าที่ 2</div></header>
+      <ul>
+        <li><i class="sev s3"></i><div><b>จัด-จ่ายสินค้าผิด / ไม่ครบออเดอร์</b> — 5 ใน 6 คนเขียนถึง รักษาการคลังและโลจิสติกส์ให้ Impact 5 ความถี่ 5 และระบุเองว่า “แก้ปัญหาเดิมที่เกิดซ้ำ แต่ยังไม่มีระบบป้องกัน”</div></li>
+        <li><i class="sev s3"></i><div><b>ปล่อยรถไม่ตรงเวลา + รถเสียกลางทาง</b> — รักษาการคลังฯ ต้องตื่นมาแก้ปัญหากลางดึก; ยังไม่มี PM รถตามรอบและรถสำรอง</div></li>
+        <li><i class="sev s2"></i><div><b>ไม่รู้เวลาสินค้าออกจากผลิต</b> — ต้องไล่ตามเพื่อให้ทันลูกค้าเข้ารับ ผู้ชำนาญการคลังสินค้าเสีย 1–3 ชม. และเกิด Rework กว่า 3 ชม.</div></li>
+        <li><i class="sev s2"></i><div><b>คุณภาพและอุณหภูมิสินค้าแช่เย็นไม่ได้ STD.</b> — อายุจัดเก็บไม่ได้ตาม shelf life ต่อเนื่องถึง complain ฝั่งขาย</div></li>
+        <li><i class="sev s1"></i><div><b>ไลน์แทรกเวลาส่วนตัว</b> — เจ้าหน้าที่คลังฯ ระบุตรง ๆ ว่าวันหยุดก็มีแต่งานเต็มไลน์ ควรถือเป็นสัญญาณเรื่องภาระงาน</div></li>
+      </ul>
+      <div class="own">ซ้ำกับแผนกอื่น: Rework · รอข้อมูล · คุณภาพสินค้า · ข้อมูลกระจาย</div>
+    </div>
+
+    <div class="dept">
+      <header><h3>การตลาดออนไลน์</h3><div class="who">1 คน · รักษาการ ผจก.</div></header>
+      <ul>
+        <li><i class="sev s3"></i><div><b>ตอบแชทลูกค้าโดยไม่มีข้อมูลในมือ</b> — รอบจัดส่ง/ออเดอร์ ต้องถามประสานงานขายทุกครั้ง 1–2 ชม./วัน ตรงกับปัญหา “รอข้อมูล” ของอีก 5 แผนก</div></li>
+        <li><i class="sev s2"></i><div><b>รออนุมัติโปรโมชั่นนานถึง 1 สัปดาห์</b> — ทำให้ต้องเร่งงานภาพและรายละเอียดหลุด</div></li>
+        <li><i class="sev s2"></i><div><b>สินค้าหมดสต็อกแต่ไม่มีการแจ้ง</b> — ลูกค้าต้องกดยกเลิกคำสั่งซื้อเอง</div></li>
+        <li><i class="sev s1"></i><div><b>คนเดียวดูทั้งการตลาดและคอนเทนต์</b> — ขอแยกเป็น 2 ส่วน เพราะครอบคลุมไม่ไหวและหลุดงานบางส่วน</div></li>
+      </ul>
+      <div class="own">ซ้ำกับแผนกอื่น: รอข้อมูล · รออนุมัติ</div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <h2>ข้อเสนอ 5 ข้อ พร้อมตัววัด</h2>
+    <p>ทุกข้อแก้ปัญหาที่ซ้ำข้ามแผนก จึงต้องตัดสินใจที่ระดับสายงาน ไม่ใช่ระดับแผนก — ค่าปัจจุบันมาจากสิ่งที่ผู้กรอกเขียนเอง</p>
+  </div>
+  <div class="acts">
+
+    <div class="act">
+      <div class="l">
+        <h3>ประกาศ SLA ระหว่างแผนกเป็นข้อตกลงระดับองค์กร</h3>
+        <p>กำหนดเวลาตอบกลับของ RD, จัดซื้อ, ผลิต, CS-LOAD และบัญชี พร้อมย้ายการขอ-รับงานออกจากไลน์กลุ่มไปที่ระบบที่มีเลขงาน เจ้าของ และสถานะ — ปลดล็อกปัญหาข้อ 1 ซึ่งเป็นตัวป้อนให้ข้อ 2, 3 และ 5</p>
+      </div>
+      <div class="r">
+        <div class="metric"><em>เวลาไล่ตามงาน</em><b>1–1.5 ชม./คน/วัน</b><b class="to">→ ≤ 20 นาที</b></div>
+        <div class="metric"><em>NPD หลุด leadtime</em><b>4–5 วัน/สัปดาห์</b><b class="to">→ ≤ 1 วัน/สัปดาห์</b></div>
+      </div>
+    </div>
+
+    <div class="act">
+      <div class="l">
+        <h3>ทำ Approval Matrix หนึ่งหน้า + รวมรอบอนุมัติเป็น 2 รอบ/วัน</h3>
+        <p>ระบุวงเงินและเงื่อนไขที่แต่ละระดับตัดสินใจจบได้เอง ลดขั้นอนุมัติเหลือขั้นเดียวสำหรับงานที่อยู่ในกรอบ ครอบคลุมทั้งราคาขาย, โปรโมชั่น และอีเมลลูกค้าใหม่ — ของที่ตกลงกันแล้วแต่ยังไม่ได้เขียน</p>
+      </div>
+      <div class="r">
+        <div class="metric"><em>เวลารออนุมัติ</em><b>30 นาที – 1 วัน</b><b class="to">→ ≤ 4 ชม.</b></div>
+        <div class="metric"><em>เรื่องที่ต้องขออนุมัติ</em><b>เกือบทุกเรื่อง</b><b class="to">→ ≤ 30%</b></div>
+      </div>
+    </div>
+
+    <div class="act">
+      <div class="l">
+        <h3>ตั้งจุด Final Confirm ก่อนเริ่มงานเอกสารและงานจัดจ่าย</h3>
+        <p>Checklist ข้อมูลต้นทางที่ผู้ส่งต้องยืนยัน + นิยามร่วมว่า “ส่งงานถือว่าเสร็จเมื่อไหร่” + ป้อนกลับคุณภาพงานสองทางรายแผนก เพื่อให้แก้ที่ต้นทางแทนการแก้ที่ชิ้นงานทุกครั้ง</p>
+      </div>
+      <div class="r">
+        <div class="metric"><em>Rev. เอกสารหลังทำเสร็จ</em><b>3–4 ครั้ง/สัปดาห์</b><b class="to">→ ≤ 1 ครั้ง/สัปดาห์</b></div>
+        <div class="metric"><em>จัด-จ่ายผิด/ไม่ครบ</em><b>Impact 5 · ทุกสัปดาห์</b><b class="to">→ ≤ 1 ครั้ง/เดือน</b></div>
+      </div>
+    </div>
+
+    <div class="act">
+      <div class="l">
+        <h3>รวมข้อมูลราคา ต้นทุน และประวัติเสนอราคาเป็นฐานเดียว ให้ Scoreboard ดึงเอง</h3>
+        <p>ค้นได้ด้วยลูกค้า สินค้า ตลาด และช่วงเวลา เลิกคีย์มือย้อนหลัง และทำแอปคำนวณตู้ให้ฝ่ายขายกดเองแทนการรอ RD ทุกวัน — 15 คนจาก 5 แผนกเขียนถึงเรื่องนี้</p>
+      </div>
+      <div class="r">
+        <div class="metric"><em>เวลารวบรวมข้อมูล</em><b>30 นาที – 1 ชม./วัน</b><b class="to">→ ≤ 10 นาที</b></div>
+        <div class="metric"><em>คีย์ Scoreboard ด้วยมือ</em><b>30 นาที/วัน</b><b class="to">→ 0</b></div>
+      </div>
+    </div>
+
+    <div class="act">
+      <div class="l">
+        <h3>ปรับประชุมจากเวทีรายงานตัวเลข เป็นเวทีตัดสินใจ</h3>
+        <p>ส่งตัวเลขและสถานะเป็นรายงานล่วงหน้า ประชุมคุยเฉพาะเรื่องที่ยังไม่ถึงเป้าหรือยังติดปัญหา และลดรอบประชุมปรับปรุงงาน/KPI เป็น 2 สัปดาห์/ครั้ง ตามที่ FSC และขายต่างประเทศเสนอตรงกัน</p>
+      </div>
+      <div class="r">
+        <div class="metric"><em>เวลาประชุม</em><b>1–2 ชม./คน/วัน</b><b class="to">→ ≤ 45 นาที/วัน</b></div>
+        <div class="metric"><em>เวลาที่คืนให้งานขาย</em><b>—</b><b class="to">→ +1 ชม./คน/วัน</b></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <h2>สิ่งที่ทุกแผนกอยากทำแต่ถูกเบียดออกไปก่อนเสมอ</h2>
+    <p>อ่านจากข้อ 6 ของทั้ง 26 ชุด — งานสามกลุ่มนี้คือที่ที่เวลาจาก 5 ข้อเสนอข้างบนควรถูกนำไปลง</p>
+  </div>
+  <div class="depts">
+    <div class="dept"><header><h3>หาและเปิดลูกค้าใหม่</h3><div class="who">DMS · FSC · ขายต่างประเทศ</div></header>
+      <ul><li><i class="sev s1"></i><div>ถูกตัดออกก่อนเสมอเมื่อมีงานด่วนหรืองานระบายของในวัน หัวหน้าทีมขายต่างประเทศเขียนตรง ๆ ว่า “งานที่ถูกตัดออกก่อนเสมอคือลูกค้าใหม่กับการปรับปรุงงาน ซึ่งเป็นงานที่สร้างการเติบโต”</div></li></ul>
+    </div>
+    <div class="dept"><header><h3>พัฒนาสินค้าใหม่ (NPD)</h3><div class="who">FSC · ขายต่างประเทศ</div></header>
+      <ul><li><i class="sev s1"></i><div>ผู้กรอก FSC สองรายเลือก Keep และบอกว่าเป็นงานที่ได้เรียนรู้ทั้งกระบวนการ แต่เวลาทำราคา NPD หมดไปกับการเปิดหลายชีทและทวนสูตรด้วยมือ</div></li></ul>
+    </div>
+    <div class="dept"><header><h3>สอนทีมและสร้างคน</h3><div class="who">ขายต่างประเทศ · FSC</div></header>
+      <ul><li><i class="sev s1"></i><div>ทั้งผู้จัดการฝ่ายขายต่างประเทศ หัวหน้าทีม และรักษาการ ผจก. FSC เลือก Keep งานสอนทีมเป็นอันดับต้น ๆ แต่ทั้งสามคนถูกงานตรวจงานและงานไล่ตามกินเวลาไปวันละ 3–4 ชม.</div></li></ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  ที่มา: แบบฟอร์มทบทวนงานรายบุคคลและออกแบบ KPI 26 ชุด · กรอก 10–11 ก.ย. 2569 · ข้อ 4 ปัญหา 3 อันดับ, ข้อ 5 งานที่กินเวลาแต่คุณค่าต่ำ, ข้อ 6 สิ่งที่อยากเปลี่ยน<br>
+  ฉบับเผยแพร่ — แทนชื่อผู้กรอกด้วยตำแหน่งงานทั้งหมด เนื้อหาปัญหาและตัวเลขคงเดิม<br>
+  ค่าเวลาและระดับ Impact ทั้งหมดเป็นค่าที่ผู้ปฏิบัติงานประเมินเอง ยังไม่ได้ทวนกับข้อมูลระบบ · ตัวเลขเป้าหมายในข้อเสนอเป็นข้อเสนอเพื่อให้หัวหน้าสายงานตัดสินใจ
+</footer>
+
+</div>
