@@ -138,6 +138,14 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
 .qmet .from{color:var(--ink-2)}
 .qmet .to{color:var(--accent);font-weight:500}
 
+.qdo b{font-weight:600}
+.qen{font-family:"IBM Plex Mono",monospace;font-size:var(--micro);color:var(--muted);letter-spacing:.02em}
+.qteam.wide{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px 26px;align-items:start}
+.qteam.wide>h3,.qteam.wide>.goal{grid-column:1/-1}
+.dept.wide{grid-column:1/-1}
+.dept.wide ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:9px 26px}
+.dept.wide .own{grid-column:1/-1}
+
 /* ---- tabs ---- */
 [hidden]{display:none!important}
 .tabs{
@@ -183,15 +191,15 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
       <h3>DMS — ขายภายในประเทศ</h3>
       <div class="goal">เป้าหมาย: ฐานออเดอร์ cover ปริมาณไก่เข้าเชือด</div>
       <div class="qitem"><div class="qnum">1</div><div class="qbody">
-        <div class="qdo">ทำคอนแทรครอบสั่งซื้อกับลูกค้าประจำ แทนการโทรตามรายวัน<span class="qtag t-yup">ยุบ</span></div>
+        <div class="qdo"><b>ทำสัญญารอบสั่งซื้อกับลูกค้าประจำ</b> <span class="qen">Standing Order Agreement</span><span class="qtag t-yup">ยุบ</span><br>ตกลงรอบและปริมาณล่วงหน้ากับลูกค้าที่สั่งต่อเนื่อง แทนการโทรไล่ตามรายวัน</div>
         <div class="qmet">เวลาโทรติดตามรายเดิม <span class="from">1–2 ชม./วัน</span> → <span class="to">≤ 30 นาที/วัน</span></div>
       </div></div>
       <div class="qitem"><div class="qnum">2</div><div class="qbody">
-        <div class="qdo">ให้คลังส่งรายการ No Order ตั้งแต่เช้า แทนแจ้งหน้าโรงตอนของออก<span class="qtag t-yon">ย่น</span></div>
+        <div class="qdo"><b>แจ้งสินค้า No Order ล่วงหน้า</b> <span class="qen">Early Stock Visibility</span><span class="qtag t-yon">ย่น</span><br>ให้คลังส่งรายการ No Order ตั้งแต่เช้า แทนแจ้งหน้าโรงตอนของออกแล้ว</div>
         <div class="qmet">เวลาเร่งระบายของในวัน <span class="from">3 ชม./วัน</span> → <span class="to">≤ 1 ชม./วัน</span></div>
       </div></div>
       <div class="qitem"><div class="qnum">3</div><div class="qbody">
-        <div class="qdo">ใช้ไฟล์สต็อกฟรีสแหล่งเดียวที่เชื่อถือได้ เลิกเช็คซ้ำ<span class="qtag t-yor">ย่อ</span></div>
+        <div class="qdo"><b>รวมไฟล์สต็อกให้เหลือแหล่งเดียว</b> <span class="qen">Single Source of Truth</span><span class="qtag t-yor">ย่อ</span><br>ใช้ไฟล์สต็อกฟรีสที่เชื่อถือได้ชุดเดียว เลิกเช็คซ้ำก่อนจัดขาย</div>
         <div class="qmet">เวลาเช็คสต็อกซ้ำ <span class="from">30 นาที/วัน</span> → <span class="to">0</span></div>
       </div></div>
     </div>
@@ -199,15 +207,15 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
       <h3>FSC — Food Supply Chain</h3>
       <div class="goal">เป้าหมาย: เปิดลูกค้าใหม่และปิด NPD ได้เร็วขึ้น</div>
       <div class="qitem"><div class="qnum">1</div><div class="qbody">
-        <div class="qdo">ยุบเอกสารเปิดหน้าบัญชีเหลือชุดเดียว<span class="qtag t-yup">ยุบ</span></div>
+        <div class="qdo"><b>ยุบเอกสารเปิดบัญชีเหลือชุดเดียว</b> <span class="qen">Customer Onboarding Pack</span><span class="qtag t-yup">ยุบ</span><br>รวมเอกสารเปิดหน้าบัญชีและขอเครดิตเป็นฉบับเดียว ลดจุดที่ลูกค้าถอย</div>
         <div class="qmet">ลูกค้าใหม่ที่หลุดเพราะเอกสาร <span class="from">เสียโอกาสประจำ</span> → <span class="to">0 ราย/เดือน</span></div>
       </div></div>
       <div class="qitem"><div class="qnum">2</div><div class="qbody">
-        <div class="qdo">ทำเทมเพลตคำนวณราคา NPD ชุดเดียว เลิกทวนสูตรข้ามชีท<span class="qtag t-yon">ย่น</span></div>
+        <div class="qdo"><b>ทำเทมเพลตคำนวณราคา NPD ชุดเดียว</b> <span class="qen">NPD Costing Template</span><span class="qtag t-yon">ย่น</span><br>ล็อกสูตรและลิงก์ต้นทุนไว้ที่เดียว เลิกทวนสูตรข้ามชีททุกครั้ง</div>
         <div class="qmet">เวลาทำราคา NPD ต่อสินค้า <span class="from">เกือบทั้งวัน</span> → <span class="to">ลดครึ่ง</span></div>
       </div></div>
       <div class="qitem"><div class="qnum">3</div><div class="qbody">
-        <div class="qdo">ลดรอบประชุม KPI/ปรับปรุงงาน เป็น 2 สัปดาห์/ครั้ง<span class="qtag t-yor">ย่อ</span></div>
+        <div class="qdo"><b>ลดรอบประชุมติดตามงาน</b> <span class="qen">Meeting Cadence Reset</span><span class="qtag t-yor">ย่อ</span><br>ปรับประชุม KPI/ปรับปรุงงานเป็น 2 สัปดาห์/ครั้ง และส่งตัวเลขล่วงหน้า</div>
         <div class="qmet">เวลาประชุมนอกรอบ <span class="from">2–3 ชม./สัปดาห์</span> → <span class="to">≤ 1 ชม./2 สัปดาห์</span></div>
       </div></div>
     </div>
@@ -215,15 +223,15 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
       <h3>ขายต่างประเทศ / EPA</h3>
       <div class="goal">เป้าหมาย: ตอบลูกค้าเร็วขึ้น ไม่เสียดีลที่แข่งด้านเวลา</div>
       <div class="qitem"><div class="qnum">1</div><div class="qbody">
-        <div class="qdo">ทำ Approval Matrix 1 หน้า ลดอนุมัติเหลือขั้นเดียวสำหรับงานในกรอบ<span class="qtag t-yup">ยุบ</span></div>
+        <div class="qdo"><b>จัดทำเกณฑ์มอบอำนาจหนึ่งหน้า</b> <span class="qen">Approval Matrix</span><span class="qtag t-yup">ยุบ</span><br>ระบุวงเงินและเงื่อนไขที่แต่ละระดับตัดสินใจจบได้เอง ลดเหลือขั้นเดียวสำหรับงานในกรอบ</div>
         <div class="qmet">เรื่องที่ต้องขออนุมัติ <span class="from">เกือบทุกเรื่อง</span> → <span class="to">≤ 30%</span></div>
       </div></div>
       <div class="qitem"><div class="qnum">2</div><div class="qbody">
-        <div class="qdo">ทำแอปคำนวณตู้ให้ฝ่ายขายกดเอง ไม่ต้องรอ RD<span class="qtag t-yon">ย่น</span></div>
+        <div class="qdo"><b>ทำเครื่องมือคำนวณตู้ให้ฝ่ายขายใช้เอง</b> <span class="qen">Self-Service Container Calculator</span><span class="qtag t-yon">ย่น</span><br>เป็นการคำนวณที่มีสูตรตายตัว ไม่ควรต้องรอ RD ทุกวัน</div>
         <div class="qmet">การรอ RD คำนวณตู้ <span class="from">ทุกวัน</span> → <span class="to">0</span></div>
       </div></div>
       <div class="qitem"><div class="qnum">3</div><div class="qbody">
-        <div class="qdo">ตกลงเช็คลิสต์ส่งมอบกับแผนกที่เกี่ยวข้อง เลิกตรวจทุกรายการเอง<span class="qtag t-yor">ย่อ</span></div>
+        <div class="qdo"><b>ตกลงเช็คลิสต์ส่งมอบระหว่างแผนก</b> <span class="qen">Definition of Done</span><span class="qtag t-yor">ย่อ</span><br>นิยามร่วมกันว่าส่งงานถือว่าเสร็จเมื่อไหร่ เลิกตรวจทุกรายการด้วยตัวเอง</div>
         <div class="qmet">เวลาตรวจงานของหัวหน้าทีม <span class="from">2–3 ชม./วัน</span> → <span class="to">≤ 1 ชม./วัน</span></div>
       </div></div>
     </div>
@@ -231,15 +239,15 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
       <h3>ประสานงานขายต่างประเทศ + Shipping</h3>
       <div class="goal">เป้าหมาย: ออกเอกสารจบในรอบเดียว ไม่ต้องทำซ้ำ</div>
       <div class="qitem"><div class="qnum">1</div><div class="qbody">
-        <div class="qdo">ล็อก Booking ก่อนเริ่มทำเอกสาร ห้าม Rev. ตู้ที่ทำเสร็จแล้ว<span class="qtag t-yup">ยุบ</span></div>
+        <div class="qdo"><b>ล็อกข้อมูลก่อนเริ่มงานเอกสาร</b> <span class="qen">Document Freeze Point</span><span class="qtag t-yup">ยุบ</span><br>ยืนยัน Booking ให้จบก่อนเริ่ม และห้าม Rev. ตู้ที่ทำเอกสารเสร็จแล้ว</div>
         <div class="qmet">Rev. เอกสารหลังทำเสร็จ <span class="from">3–4 ครั้ง/สัปดาห์</span> → <span class="to">≤ 1 ครั้ง/สัปดาห์</span></div>
       </div></div>
       <div class="qitem"><div class="qnum">2</div><div class="qbody">
-        <div class="qdo">ทำฟอร์ม Shipping Document Instruction ให้ลูกค้ากรอกตั้งแต่เปิดบัญชี<span class="qtag t-yon">ย่น</span></div>
+        <div class="qdo"><b>เก็บเงื่อนไขลูกค้าตั้งแต่เปิดบัญชี</b> <span class="qen">Shipping Document Instruction</span><span class="qtag t-yon">ย่น</span><br>ทำฟอร์มให้ลูกค้ากรอก Requirement รายประเทศตั้งแต่ต้น ไม่ต้องไล่ถามทีหลัง</div>
         <div class="qmet">รอบถาม-ตอบ Requirement ลูกค้าใหม่ <span class="from">หลายรอบ</span> → <span class="to">≤ 1 รอบ</span></div>
       </div></div>
       <div class="qitem"><div class="qnum">3</div><div class="qbody">
-        <div class="qdo">ตั้ง Cut-off แจ้งฟอร์มตู้ล่วงหน้า 7 วันก่อนโหลด<span class="qtag t-yor">ย่อ</span></div>
+        <div class="qdo"><b>กำหนดเวลาตัดรอบงานโหลด</b> <span class="qen">Cut-off Time</span><span class="qtag t-yor">ย่อ</span><br>แจ้งฟอร์มตู้ล่วงหน้า 7 วันก่อนโหลด เลิกรับงานแจ้งเย็นขอเช้า</div>
         <div class="qmet">งานด่วนที่แจ้งข้ามคืน <span class="from">ทุกสัปดาห์</span> → <span class="to">≤ 1 ครั้ง/เดือน</span></div>
       </div></div>
     </div>
@@ -247,47 +255,47 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
       <h3>ประสานงานขายภายในประเทศ</h3>
       <div class="goal">เป้าหมาย: ปิดเคสได้เองในวัน ไม่ต้องไล่ตามข้ามแผนก</div>
       <div class="qitem"><div class="qnum">1</div><div class="qbody">
-        <div class="qdo">ตั้งทะเบียนเคสเบี่ยงเบน ระบุเจ้าของและเวลาตอบกลับ ให้เจ้าของกระบวนการเป็นคนปิดเคสเอง<span class="qtag t-yup">ยุบ</span></div>
+        <div class="qdo"><b>จัดตั้งระบบควบคุมงานเบี่ยงเบน</b> <span class="qen">Centralized Case Tracking</span><span class="qtag t-yup">ยุบ</span><br>กำหนดเจ้าภาพ (Owner) และเวลาตอบกลับมาตรฐาน (SLA) สำหรับปัญหาสินค้า เช่น อุณหภูมิไม่ได้ หรือ Defect เพื่อลดภาระการตามงานซ้ำซ้อนของทีม</div>
         <div class="qmet">เวลาปิดเคสเบี่ยงเบน <span class="from">1–2 วัน/เคส</span> → <span class="to">≤ 4 ชม./เคส</span></div>
       </div></div>
       <div class="qitem"><div class="qnum">2</div><div class="qbody">
-        <div class="qdo">ให้โลจิสติกส์เข้ากลุ่มลูกค้าโดยตรง เลิกให้ประสานงานขายเป็นคนกลางตามรถ<span class="qtag t-yon">ย่น</span></div>
-        <div class="qmet">งานตามรถ/ตามเงินแทนแผนกอื่น <span class="from">ทุกวัน</span> → <span class="to">0</span></div>
+        <div class="qdo"><b>สร้างฐานข้อมูลกลาง</b> <span class="qen">Single Source of Truth</span><span class="qtag t-yor">ย่อ</span><br>รวบรวม Master Data เช่น ข้อมูล Stock จริง วัตถุดิบ (RM) และราคาสินค้า ให้อยู่ในระบบหรือ Dashboard เดียว เพื่อลดการทำ Manual Report และลดการเปิดไฟล์ Excel หลายชุด</div>
+        <div class="qmet">เวลาทำรายงาน/ค้นข้อมูล <span class="from">30–90 นาที/ครั้ง</span> → <span class="to">≤ 10 นาที</span></div>
       </div></div>
       <div class="qitem"><div class="qnum">3</div><div class="qbody">
-        <div class="qdo">รวมรายงานขายที่ใช้ข้อมูลชุดเดียวกันให้เหลือฉบับเดียว ดึงจากฐานข้อมูลกลาง<span class="qtag t-yor">ย่อ</span></div>
-        <div class="qmet">เวลาทำรายงาน/ค้นข้อมูล <span class="from">30–90 นาที/ครั้ง</span> → <span class="to">≤ 10 นาที</span></div>
+        <div class="qdo"><b>จัดระเบียบการรับงานแทรกและปรับแผน</b> <span class="qen">Workflow Management</span><span class="qtag t-yon">ย่น</span><br>กำหนด Lead Time และ Cut-off Time ที่ชัดเจนร่วมกับเซลส์และลูกค้า สำหรับการขอปรับแผนหรือขอสินค้าตัวอย่างด่วน</div>
+        <div class="qmet">งานแทรกที่ทำให้แผนพัง <span class="from">ทุกวัน</span> → <span class="to">≤ 1 ครั้ง/สัปดาห์</span></div>
       </div></div>
     </div>
     <div class="qteam">
       <h3>คลังสินค้าและโลจิสติกส์ / DMC</h3>
       <div class="goal">เป้าหมาย: ส่งมอบตรงเวลา ตรงออเดอร์</div>
       <div class="qitem"><div class="qnum">1</div><div class="qbody">
-        <div class="qdo">ตั้งจุดตรวจยืนยันรายการก่อนจ่ายทุกครั้ง<span class="qtag t-yup">ยุบ</span></div>
+        <div class="qdo"><b>ตั้งจุดตรวจยืนยันก่อนจ่าย</b> <span class="qen">Pre-Dispatch Verification</span><span class="qtag t-yup">ยุบ</span><br>ทวนรายการก่อนจ่ายทุกครั้ง แทนการไปแก้หลังลูกค้าได้ของผิด</div>
         <div class="qmet">จัด-จ่ายผิด/ไม่ครบ <span class="from">ทุกสัปดาห์</span> → <span class="to">≤ 1 ครั้ง/เดือน</span></div>
       </div></div>
       <div class="qitem"><div class="qnum">2</div><div class="qbody">
-        <div class="qdo">ให้ผลิตอัปเดตสถานะรายการแบบ Real-time ที่หน้างานเห็นเอง<span class="qtag t-yon">ย่น</span></div>
+        <div class="qdo"><b>แสดงสถานะสินค้าจากผลิตแบบเรียลไทม์</b> <span class="qen">Real-time Production Status</span><span class="qtag t-yon">ย่น</span><br>ให้หน้างานเห็นเองว่ารายการไหนครบและจัดได้ในครั้งเดียว ไม่ต้องไล่ถาม</div>
         <div class="qmet">เวลาไล่ตามสินค้าจากผลิต <span class="from">1–3 ชม./วัน</span> → <span class="to">≤ 30 นาที/วัน</span></div>
       </div></div>
       <div class="qitem"><div class="qnum">3</div><div class="qbody">
-        <div class="qdo">ทำ PM รถตามรอบ ตรวจก่อนใช้งาน และเตรียมรถสำรอง<span class="qtag t-yor">ย่อ</span></div>
+        <div class="qdo"><b>บำรุงรักษารถเชิงป้องกัน</b> <span class="qen">Preventive Maintenance</span><span class="qtag t-yor">ย่อ</span><br>ทำ PM ตามรอบ ตรวจก่อนใช้งาน และเตรียมรถสำรองสำหรับเหตุฉุกเฉิน</div>
         <div class="qmet">รถเสียระหว่างจัดส่ง <span class="from">หลายครั้ง/เดือน</span> → <span class="to">0 ครั้ง/เดือน</span></div>
       </div></div>
     </div>
-    <div class="qteam">
+    <div class="qteam wide">
       <h3>การตลาดออนไลน์</h3>
       <div class="goal">เป้าหมาย: ตอบลูกค้าจบในแชทเดียว และออกโปรฯ ได้ทัน</div>
       <div class="qitem"><div class="qnum">1</div><div class="qbody">
-        <div class="qdo">ให้การตลาดเข้าถึงสถานะออเดอร์และรอบส่งได้เอง<span class="qtag t-yup">ยุบ</span></div>
+        <div class="qdo"><b>เปิดสิทธิ์ดูสถานะออเดอร์ให้การตลาด</b> <span class="qen">Self-Service Order Lookup</span><span class="qtag t-yup">ยุบ</span><br>ดูรอบจัดส่งและสถานะออเดอร์เองได้ ไม่ต้องถามประสานงานขายทุกครั้ง</div>
         <div class="qmet">เวลาถามข้อมูลจากประสานงานขาย <span class="from">1–2 ชม./วัน</span> → <span class="to">≤ 20 นาที/วัน</span></div>
       </div></div>
       <div class="qitem"><div class="qnum">2</div><div class="qbody">
-        <div class="qdo">อนุมัติกรอบโปรโมชั่นล่วงหน้ารายเดือน แทนอนุมัติรายครั้ง<span class="qtag t-yon">ย่น</span></div>
+        <div class="qdo"><b>อนุมัติกรอบโปรโมชั่นล่วงหน้า</b> <span class="qen">Pre-approved Promotion Framework</span><span class="qtag t-yon">ย่น</span><br>กำหนดกรอบและเพดานส่วนลดรายเดือน แทนการอนุมัติทีละครั้ง</div>
         <div class="qmet">เวลารออนุมัติโปรโมชั่น <span class="from">1 สัปดาห์</span> → <span class="to">≤ 2 วัน</span></div>
       </div></div>
       <div class="qitem"><div class="qnum">3</div><div class="qbody">
-        <div class="qdo">แยกงานการตลาดกับงานคอนเทนต์ออกจากกัน<span class="qtag t-yor">ย่อ</span></div>
+        <div class="qdo"><b>แยกบทบาทการตลาดกับคอนเทนต์</b> <span class="qen">Role Split</span><span class="qtag t-yor">ย่อ</span><br>ให้แต่ละส่วนมีเจ้าของชัดเจน แทนที่คนเดียวดูทั้งสองอย่าง</div>
         <div class="qmet">งานที่หลุดเพราะดูคนเดียว <span class="from">มีประจำ</span> → <span class="to">0</span></div>
       </div></div>
     </div>
@@ -499,7 +507,7 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
       <div class="own">ซ้ำกับแผนกอื่น: Rework · รอข้อมูล · คุณภาพสินค้า · ข้อมูลกระจาย</div>
     </div>
 
-    <div class="dept">
+    <div class="dept wide">
       <header><h3>การตลาดออนไลน์</h3><div class="who">1 คน · รักษาการ ผจก.</div></header>
       <ul>
         <li><i class="sev s3"></i><div><b>ตอบแชทลูกค้าโดยไม่มีข้อมูลในมือ</b> — รอบจัดส่ง/ออเดอร์ ต้องถามประสานงานขายทุกครั้ง 1–2 ชม./วัน ตรงกับปัญหา “รอข้อมูล” ของอีก 6 แผนก</div></li>
@@ -579,9 +587,7 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
 </section>
 
 <footer>
-  ที่มา: แบบฟอร์มทบทวนงานรายบุคคลและออกแบบ KPI 36 ชุด · กรอก 10–11 ก.ย. 2569 · ข้อ 4 ปัญหา 3 อันดับ, ข้อ 5 งานที่กินเวลาแต่คุณค่าต่ำ, ข้อ 6 สิ่งที่อยากเปลี่ยน<br>
-  ฉบับเผยแพร่ — แทนชื่อผู้กรอกด้วยตำแหน่งงานทั้งหมด เนื้อหาปัญหาและตัวเลขคงเดิม<br>
-  ค่าเวลาและระดับ Impact ทั้งหมดเป็นค่าที่ผู้ปฏิบัติงานประเมินเอง ยังไม่ได้ทวนกับข้อมูลระบบ · ตัวเลขเป้าหมายในข้อเสนอเป็นข้อเสนอเพื่อให้หัวหน้าสายงานตัดสินใจ
+  ฉบับเผยแพร่ แทนชื่อผู้กรอกด้วยตำแหน่งงาน · ที่มา: แบบฟอร์มทบทวนงานรายบุคคล 36 ชุด · ก.ย. 2569 — ค่าเวลาและระดับ Impact เป็นค่าที่ผู้ปฏิบัติงานประเมินเอง ยังไม่ได้ทวนกับข้อมูลระบบ และตัวเลขเป้าหมายเป็นข้อเสนอเพื่อให้หัวหน้าสายงานตัดสินใจ
 </footer>
 
 </div>
