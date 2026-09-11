@@ -118,6 +118,23 @@ td.cov{font-family:"IBM Plex Mono",monospace;font-weight:500;font-variant-numeri
   .theme{grid-template-columns:1fr;gap:8px}
 }
 footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:var(--micro);font-family:"IBM Plex Mono",monospace;letter-spacing:.04em;line-height:1.8}
+/* ---- tabs ---- */
+[hidden]{display:none!important}
+.tabs{
+  display:flex;gap:2px;overflow-x:auto;margin-top:-32px;
+  border-bottom:1px solid var(--line);
+}
+.tabs button{
+  flex:0 0 auto;appearance:none;background:transparent;cursor:pointer;
+  border:0;border-bottom:2px solid transparent;margin-bottom:-1px;
+  font-family:"Chakra Petch","IBM Plex Sans Thai",sans-serif;
+  font-size:0.92rem;font-weight:600;color:var(--muted);
+  padding:11px 16px;white-space:nowrap;transition:color .15s ease;
+}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:-3px;border-radius:2px}
+@media (prefers-reduced-motion:reduce){.tabs button{transition:none}}
 </style>
 
 <div class="wrap">
@@ -128,7 +145,15 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
   <p>สรุปจากแบบฟอร์มทบทวนงานรายบุคคล 26 ชุด ใน 6 แผนก — อ่านจากข้อ 4 (ปัญหา 3 อันดับ), ข้อ 5 (งานที่กินเวลาแต่คุณค่าต่ำ) และข้อ 6 (สิ่งที่อยากเปลี่ยน) แล้วจับปัญหาที่พูดตรงกันข้ามแผนกออกมา</p>
 </div>
 
-<section>
+<nav class="tabs" role="tablist" aria-label="หัวข้อในรายงาน">
+  <button type="button" role="tab" id="tab-matrix" data-target="matrix" aria-controls="matrix" aria-selected="false" tabindex="-1">ปัญหาซ้ำ × แผนก</button>
+  <button type="button" role="tab" id="tab-themes" data-target="themes" aria-controls="themes" aria-selected="false" tabindex="-1">5 ปัญหาหลัก</button>
+  <button type="button" role="tab" id="tab-depts" data-target="depts" aria-controls="depts" aria-selected="false" tabindex="-1">แยกตามแผนก</button>
+  <button type="button" role="tab" id="tab-actions" data-target="actions" aria-controls="actions" aria-selected="false" tabindex="-1">ข้อเสนอ + ตัววัด</button>
+  <button type="button" role="tab" id="tab-squeezed" data-target="squeezed" aria-controls="squeezed" aria-selected="false" tabindex="-1">งานที่ถูกเบียด</button>
+</nav>
+
+<section id="matrix" class="panel" role="tabpanel" aria-labelledby="tab-matrix">
   <div class="sechead">
     <h2>แผนผังปัญหาซ้ำ × แผนก</h2>
     <p>ตัวเลขในช่อง = จำนวนคนในแผนกนั้นที่เขียนถึงปัญหาเดียวกัน ยิ่งแถวไหนมีช่องเข้มกระจายหลายแผนก ยิ่งแปลว่าเป็นปัญหาของระบบ ไม่ใช่ของคนหรือของแผนกใดแผนกหนึ่ง</p>
@@ -176,7 +201,7 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
   </div>
 </section>
 
-<section>
+<section id="themes" class="panel" role="tabpanel" aria-labelledby="tab-themes">
   <div class="sechead">
     <h2>5 ปัญหาซ้ำที่ควรแก้ที่ระบบ ไม่ใช่ที่คน</h2>
     <p>เรียงตามจำนวนแผนกที่เจอปัญหาเดียวกัน — ทุกข้อมีคนเขียนถึงจากอย่างน้อย 3 แผนก ซึ่งแปลว่าถ้าแก้ทีละแผนก จะแก้ไม่หาย</p>
@@ -270,7 +295,7 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
   </div>
 </section>
 
-<section>
+<section id="depts" class="panel" role="tabpanel" aria-labelledby="tab-depts">
   <div class="sechead">
     <h2>แยกตามแผนก</h2>
     <p>ปัญหาเด่นของแต่ละแผนก และตัวที่ซ้ำกับแผนกอื่น — แถบสีซ้ายบอกระดับผลกระทบที่ผู้กรอกให้เอง</p>
@@ -347,7 +372,7 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
   </div>
 </section>
 
-<section>
+<section id="actions" class="panel" role="tabpanel" aria-labelledby="tab-actions">
   <div class="sechead">
     <h2>ข้อเสนอ 5 ข้อ พร้อมตัววัด</h2>
     <p>ทุกข้อแก้ปัญหาที่ซ้ำข้ามแผนก จึงต้องตัดสินใจที่ระดับสายงาน ไม่ใช่ระดับแผนก — ค่าปัจจุบันมาจากสิ่งที่ผู้กรอกเขียนเอง</p>
@@ -412,7 +437,7 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
   </div>
 </section>
 
-<section>
+<section id="squeezed" class="panel" role="tabpanel" aria-labelledby="tab-squeezed">
   <div class="sechead">
     <h2>สิ่งที่ทุกแผนกอยากทำแต่ถูกเบียดออกไปก่อนเสมอ</h2>
     <p>อ่านจากข้อ 6 ของทั้ง 26 ชุด — งานสามกลุ่มนี้คือที่ที่เวลาจาก 5 ข้อเสนอข้างบนควรถูกนำไปลง</p>
@@ -437,3 +462,37 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
 </footer>
 
 </div>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tabs button'));
+  var panels=[].slice.call(document.querySelectorAll('.panel'));
+  if(!tabs.length||!panels.length)return;
+  var calm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function show(id,fromClick){
+    tabs.forEach(function(t){
+      var on=t.getAttribute('data-target')===id;
+      t.setAttribute('aria-selected',on?'true':'false');
+      t.tabIndex=on?0:-1;
+    });
+    panels.forEach(function(p){p.hidden=(p.id!==id);});
+    if(fromClick){
+      if(history.replaceState)history.replaceState(null,'','#'+id);
+      window.scrollTo(calm?{top:0}:{top:0,behavior:'smooth'});
+    }
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){show(t.getAttribute('data-target'),true);});
+    t.addEventListener('keydown',function(e){
+      var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;
+      if(!d)return;
+      e.preventDefault();
+      var n=tabs[(i+d+tabs.length)%tabs.length];
+      n.focus();show(n.getAttribute('data-target'),true);
+    });
+  });
+  var start=(location.hash||'').replace('#','');
+  var ok=panels.some(function(p){return p.id===start;});
+  show(ok?start:panels[0].id,false);
+})();
+</script>
