@@ -118,6 +118,26 @@ td.cov{font-family:"IBM Plex Mono",monospace;font-weight:500;font-variant-numeri
   .theme{grid-template-columns:1fr;gap:8px}
 }
 footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:var(--micro);font-family:"IBM Plex Mono",monospace;letter-spacing:.04em;line-height:1.8}
+/* ---- quick win ---- */
+.qwrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.qteam{background:var(--panel);padding:20px;display:flex;flex-direction:column;gap:15px}
+.qteam h3{font-size:var(--h2);font-weight:600}
+.qteam>.goal{font-family:"IBM Plex Mono",monospace;font-size:var(--micro);color:var(--muted);letter-spacing:.04em;margin-top:-11px}
+.qitem{display:grid;grid-template-columns:20px 1fr;gap:0 11px}
+.qnum{font-family:"Chakra Petch",sans-serif;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums;font-size:0.95rem;line-height:1.5}
+.qbody{display:flex;flex-direction:column;gap:7px}
+.qdo{font-size:var(--small);line-height:1.55;color:var(--ink)}
+.qtag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:var(--micro);
+  letter-spacing:.08em;padding:1px 7px;border:1px solid;border-radius:2px;margin-left:6px;vertical-align:2px}
+.t-yup{color:var(--accent);border-color:var(--accent)}
+.t-yon{color:var(--warn);border-color:var(--warn)}
+.t-yor{color:var(--ok);border-color:var(--ok)}
+.qmet{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;font-family:"IBM Plex Mono",monospace;
+  font-size:var(--micro);color:var(--muted);font-variant-numeric:tabular-nums;
+  border-left:2px solid var(--line-soft);padding-left:10px}
+.qmet .from{color:var(--ink-2)}
+.qmet .to{color:var(--accent);font-weight:500}
+
 /* ---- tabs ---- */
 [hidden]{display:none!important}
 .tabs{
@@ -146,13 +166,117 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
 </div>
 
 <nav class="tabs" role="tablist" aria-label="หัวข้อในรายงาน">
+  <button type="button" role="tab" id="tab-quickwin" data-target="quickwin" aria-controls="quickwin" aria-selected="false" tabindex="-1">ทำก่อน 3 เรื่อง/ทีม</button>
   <button type="button" role="tab" id="tab-matrix" data-target="matrix" aria-controls="matrix" aria-selected="false" tabindex="-1">ปัญหาซ้ำ × แผนก</button>
   <button type="button" role="tab" id="tab-themes" data-target="themes" aria-controls="themes" aria-selected="false" tabindex="-1">5 ปัญหาหลัก</button>
   <button type="button" role="tab" id="tab-depts" data-target="depts" aria-controls="depts" aria-selected="false" tabindex="-1">แยกตามแผนก</button>
   <button type="button" role="tab" id="tab-actions" data-target="actions" aria-controls="actions" aria-selected="false" tabindex="-1">ข้อเสนอ + ตัววัด</button>
-  <button type="button" role="tab" id="tab-squeezed" data-target="squeezed" aria-controls="squeezed" aria-selected="false" tabindex="-1">งานที่ถูกเบียด</button>
 </nav>
 
+<section id="quickwin" class="panel" role="tabpanel" aria-labelledby="tab-quickwin">
+  <div class="sechead">
+    <h2>3 เรื่องที่ต้องทำก่อน — รายทีม</h2>
+    <p>คัดจากปัญหาที่ทีมนั้นเขียนเอง เฉพาะเรื่องที่ <b>ยุบ</b> ขั้นตอนทิ้งได้ <b>ย่น</b> เวลารอให้สั้นลง หรือ <b>ย่อ</b> ภาระที่ซ้ำซ้อน — เลือกเรื่องที่ทำได้เร็วและส่งผลตรงต่อเป้าหมายตามหน้าที่ของทีม ทุกข้อมีตัววัดค่าปัจจุบันและเป้าหมาย</p>
+  </div>
+  <div class="qwrap">
+    <div class="qteam">
+      <h3>DMS — ขายภายในประเทศ</h3>
+      <div class="goal">เป้าหมาย: ฐานออเดอร์ cover ปริมาณไก่เข้าเชือด</div>
+      <div class="qitem"><div class="qnum">1</div><div class="qbody">
+        <div class="qdo">ทำคอนแทรครอบสั่งซื้อกับลูกค้าประจำ แทนการโทรตามรายวัน<span class="qtag t-yup">ยุบ</span></div>
+        <div class="qmet">เวลาโทรติดตามรายเดิม <span class="from">1–2 ชม./วัน</span> → <span class="to">≤ 30 นาที/วัน</span></div>
+      </div></div>
+      <div class="qitem"><div class="qnum">2</div><div class="qbody">
+        <div class="qdo">ให้คลังส่งรายการ No Order ตั้งแต่เช้า แทนแจ้งหน้าโรงตอนของออก<span class="qtag t-yon">ย่น</span></div>
+        <div class="qmet">เวลาเร่งระบายของในวัน <span class="from">3 ชม./วัน</span> → <span class="to">≤ 1 ชม./วัน</span></div>
+      </div></div>
+      <div class="qitem"><div class="qnum">3</div><div class="qbody">
+        <div class="qdo">ใช้ไฟล์สต็อกฟรีสแหล่งเดียวที่เชื่อถือได้ เลิกเช็คซ้ำ<span class="qtag t-yor">ย่อ</span></div>
+        <div class="qmet">เวลาเช็คสต็อกซ้ำ <span class="from">30 นาที/วัน</span> → <span class="to">0</span></div>
+      </div></div>
+    </div>
+    <div class="qteam">
+      <h3>FSC — Food Supply Chain</h3>
+      <div class="goal">เป้าหมาย: เปิดลูกค้าใหม่และปิด NPD ได้เร็วขึ้น</div>
+      <div class="qitem"><div class="qnum">1</div><div class="qbody">
+        <div class="qdo">ยุบเอกสารเปิดหน้าบัญชีเหลือชุดเดียว<span class="qtag t-yup">ยุบ</span></div>
+        <div class="qmet">ลูกค้าใหม่ที่หลุดเพราะเอกสาร <span class="from">เสียโอกาสประจำ</span> → <span class="to">0 ราย/เดือน</span></div>
+      </div></div>
+      <div class="qitem"><div class="qnum">2</div><div class="qbody">
+        <div class="qdo">ทำเทมเพลตคำนวณราคา NPD ชุดเดียว เลิกทวนสูตรข้ามชีท<span class="qtag t-yon">ย่น</span></div>
+        <div class="qmet">เวลาทำราคา NPD ต่อสินค้า <span class="from">เกือบทั้งวัน</span> → <span class="to">ลดครึ่ง</span></div>
+      </div></div>
+      <div class="qitem"><div class="qnum">3</div><div class="qbody">
+        <div class="qdo">ลดรอบประชุม KPI/ปรับปรุงงาน เป็น 2 สัปดาห์/ครั้ง<span class="qtag t-yor">ย่อ</span></div>
+        <div class="qmet">เวลาประชุมนอกรอบ <span class="from">2–3 ชม./สัปดาห์</span> → <span class="to">≤ 1 ชม./2 สัปดาห์</span></div>
+      </div></div>
+    </div>
+    <div class="qteam">
+      <h3>ขายต่างประเทศ / EPA</h3>
+      <div class="goal">เป้าหมาย: ตอบลูกค้าเร็วขึ้น ไม่เสียดีลที่แข่งด้านเวลา</div>
+      <div class="qitem"><div class="qnum">1</div><div class="qbody">
+        <div class="qdo">ทำ Approval Matrix 1 หน้า ลดอนุมัติเหลือขั้นเดียวสำหรับงานในกรอบ<span class="qtag t-yup">ยุบ</span></div>
+        <div class="qmet">เรื่องที่ต้องขออนุมัติ <span class="from">เกือบทุกเรื่อง</span> → <span class="to">≤ 30%</span></div>
+      </div></div>
+      <div class="qitem"><div class="qnum">2</div><div class="qbody">
+        <div class="qdo">ทำแอปคำนวณตู้ให้ฝ่ายขายกดเอง ไม่ต้องรอ RD<span class="qtag t-yon">ย่น</span></div>
+        <div class="qmet">การรอ RD คำนวณตู้ <span class="from">ทุกวัน</span> → <span class="to">0</span></div>
+      </div></div>
+      <div class="qitem"><div class="qnum">3</div><div class="qbody">
+        <div class="qdo">ตกลงเช็คลิสต์ส่งมอบกับแผนกที่เกี่ยวข้อง เลิกตรวจทุกรายการเอง<span class="qtag t-yor">ย่อ</span></div>
+        <div class="qmet">เวลาตรวจงานของหัวหน้าทีม <span class="from">2–3 ชม./วัน</span> → <span class="to">≤ 1 ชม./วัน</span></div>
+      </div></div>
+    </div>
+    <div class="qteam">
+      <h3>ประสานงานขายต่างประเทศ + Shipping</h3>
+      <div class="goal">เป้าหมาย: ออกเอกสารจบในรอบเดียว ไม่ต้องทำซ้ำ</div>
+      <div class="qitem"><div class="qnum">1</div><div class="qbody">
+        <div class="qdo">ล็อก Booking ก่อนเริ่มทำเอกสาร ห้าม Rev. ตู้ที่ทำเสร็จแล้ว<span class="qtag t-yup">ยุบ</span></div>
+        <div class="qmet">Rev. เอกสารหลังทำเสร็จ <span class="from">3–4 ครั้ง/สัปดาห์</span> → <span class="to">≤ 1 ครั้ง/สัปดาห์</span></div>
+      </div></div>
+      <div class="qitem"><div class="qnum">2</div><div class="qbody">
+        <div class="qdo">ทำฟอร์ม Shipping Document Instruction ให้ลูกค้ากรอกตั้งแต่เปิดบัญชี<span class="qtag t-yon">ย่น</span></div>
+        <div class="qmet">รอบถาม-ตอบ Requirement ลูกค้าใหม่ <span class="from">หลายรอบ</span> → <span class="to">≤ 1 รอบ</span></div>
+      </div></div>
+      <div class="qitem"><div class="qnum">3</div><div class="qbody">
+        <div class="qdo">ตั้ง Cut-off แจ้งฟอร์มตู้ล่วงหน้า 7 วันก่อนโหลด<span class="qtag t-yor">ย่อ</span></div>
+        <div class="qmet">งานด่วนที่แจ้งข้ามคืน <span class="from">ทุกสัปดาห์</span> → <span class="to">≤ 1 ครั้ง/เดือน</span></div>
+      </div></div>
+    </div>
+    <div class="qteam">
+      <h3>คลังสินค้าและโลจิสติกส์ / DMC</h3>
+      <div class="goal">เป้าหมาย: ส่งมอบตรงเวลา ตรงออเดอร์</div>
+      <div class="qitem"><div class="qnum">1</div><div class="qbody">
+        <div class="qdo">ตั้งจุดตรวจยืนยันรายการก่อนจ่ายทุกครั้ง<span class="qtag t-yup">ยุบ</span></div>
+        <div class="qmet">จัด-จ่ายผิด/ไม่ครบ <span class="from">ทุกสัปดาห์</span> → <span class="to">≤ 1 ครั้ง/เดือน</span></div>
+      </div></div>
+      <div class="qitem"><div class="qnum">2</div><div class="qbody">
+        <div class="qdo">ให้ผลิตอัปเดตสถานะรายการแบบ Real-time ที่หน้างานเห็นเอง<span class="qtag t-yon">ย่น</span></div>
+        <div class="qmet">เวลาไล่ตามสินค้าจากผลิต <span class="from">1–3 ชม./วัน</span> → <span class="to">≤ 30 นาที/วัน</span></div>
+      </div></div>
+      <div class="qitem"><div class="qnum">3</div><div class="qbody">
+        <div class="qdo">ทำ PM รถตามรอบ ตรวจก่อนใช้งาน และเตรียมรถสำรอง<span class="qtag t-yor">ย่อ</span></div>
+        <div class="qmet">รถเสียระหว่างจัดส่ง <span class="from">หลายครั้ง/เดือน</span> → <span class="to">0 ครั้ง/เดือน</span></div>
+      </div></div>
+    </div>
+    <div class="qteam">
+      <h3>การตลาดออนไลน์</h3>
+      <div class="goal">เป้าหมาย: ตอบลูกค้าจบในแชทเดียว และออกโปรฯ ได้ทัน</div>
+      <div class="qitem"><div class="qnum">1</div><div class="qbody">
+        <div class="qdo">ให้การตลาดเข้าถึงสถานะออเดอร์และรอบส่งได้เอง<span class="qtag t-yup">ยุบ</span></div>
+        <div class="qmet">เวลาถามข้อมูลจากประสานงานขาย <span class="from">1–2 ชม./วัน</span> → <span class="to">≤ 20 นาที/วัน</span></div>
+      </div></div>
+      <div class="qitem"><div class="qnum">2</div><div class="qbody">
+        <div class="qdo">อนุมัติกรอบโปรโมชั่นล่วงหน้ารายเดือน แทนอนุมัติรายครั้ง<span class="qtag t-yon">ย่น</span></div>
+        <div class="qmet">เวลารออนุมัติโปรโมชั่น <span class="from">1 สัปดาห์</span> → <span class="to">≤ 2 วัน</span></div>
+      </div></div>
+      <div class="qitem"><div class="qnum">3</div><div class="qbody">
+        <div class="qdo">แยกงานการตลาดกับงานคอนเทนต์ออกจากกัน<span class="qtag t-yor">ย่อ</span></div>
+        <div class="qmet">งานที่หลุดเพราะดูคนเดียว <span class="from">มีประจำ</span> → <span class="to">0</span></div>
+      </div></div>
+    </div>
+  </div>
+</section>
 <section id="matrix" class="panel" role="tabpanel" aria-labelledby="tab-matrix">
   <div class="sechead">
     <h2>แผนผังปัญหาซ้ำ × แผนก</h2>
@@ -434,24 +558,6 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
       </div>
     </div>
 
-  </div>
-</section>
-
-<section id="squeezed" class="panel" role="tabpanel" aria-labelledby="tab-squeezed">
-  <div class="sechead">
-    <h2>สิ่งที่ทุกแผนกอยากทำแต่ถูกเบียดออกไปก่อนเสมอ</h2>
-    <p>อ่านจากข้อ 6 ของทั้ง 26 ชุด — งานสามกลุ่มนี้คือที่ที่เวลาจาก 5 ข้อเสนอข้างบนควรถูกนำไปลง</p>
-  </div>
-  <div class="depts">
-    <div class="dept"><header><h3>หาและเปิดลูกค้าใหม่</h3><div class="who">DMS · FSC · ขายต่างประเทศ</div></header>
-      <ul><li><i class="sev s1"></i><div>ถูกตัดออกก่อนเสมอเมื่อมีงานด่วนหรืองานระบายของในวัน หัวหน้าทีมขายต่างประเทศเขียนตรง ๆ ว่า “งานที่ถูกตัดออกก่อนเสมอคือลูกค้าใหม่กับการปรับปรุงงาน ซึ่งเป็นงานที่สร้างการเติบโต”</div></li></ul>
-    </div>
-    <div class="dept"><header><h3>พัฒนาสินค้าใหม่ (NPD)</h3><div class="who">FSC · ขายต่างประเทศ</div></header>
-      <ul><li><i class="sev s1"></i><div>ผู้กรอก FSC สองรายเลือก Keep และบอกว่าเป็นงานที่ได้เรียนรู้ทั้งกระบวนการ แต่เวลาทำราคา NPD หมดไปกับการเปิดหลายชีทและทวนสูตรด้วยมือ</div></li></ul>
-    </div>
-    <div class="dept"><header><h3>สอนทีมและสร้างคน</h3><div class="who">ขายต่างประเทศ · FSC</div></header>
-      <ul><li><i class="sev s1"></i><div>ทั้งผู้จัดการฝ่ายขายต่างประเทศ หัวหน้าทีม และรักษาการ ผจก. FSC เลือก Keep งานสอนทีมเป็นอันดับต้น ๆ แต่ทั้งสามคนถูกงานตรวจงานและงานไล่ตามกินเวลาไปวันละ 3–4 ชม.</div></li></ul>
-    </div>
   </div>
 </section>
 
