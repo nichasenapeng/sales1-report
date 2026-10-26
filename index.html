@@ -786,8 +786,13 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
       n.focus();show(n.getAttribute('data-target'),true);
     });
   });
-  var start=(location.hash||'').replace('#','');
-  var ok=panels.some(function(p){return p.id===start;});
-  show(ok?start:panels[0].id,false);
+  function fromHash(scroll){
+    var h=(location.hash||'').replace('#','');
+    var ok=panels.some(function(p){return p.id===h;});
+    show(ok?h:panels[0].id,false);
+    if(ok&&scroll)window.scrollTo(calm?{top:0}:{top:0,behavior:'smooth'});
+  }
+  window.addEventListener('hashchange',function(){fromHash(true);});
+  fromHash(false);
 })();
 </script>
