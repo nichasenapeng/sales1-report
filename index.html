@@ -146,6 +146,45 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
 .dept.wide ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:9px 26px}
 .dept.wide .own{grid-column:1/-1}
 
+/* ---- action table ---- */
+.atbl td{text-align:left;padding:11px 12px;vertical-align:top;line-height:1.5}
+.atbl thead th.lead{width:auto;text-align:left;padding-left:12px}
+.atbl td.tm{background:var(--panel-2);font-weight:600;white-space:nowrap;border-right:1px solid var(--line)}
+.atbl td.tm em{display:block;font-style:normal;font-weight:400;color:var(--muted);font-size:var(--micro);font-family:"IBM Plex Mono",monospace;margin-top:3px}
+.atbl td.ac b{display:block;font-family:"IBM Plex Mono",monospace;font-size:var(--micro);color:var(--accent);letter-spacing:.02em;margin-bottom:2px}
+.atbl td.ac em{font-style:normal;color:var(--ink)}
+.atbl td.dep{color:var(--muted);font-size:var(--micro);font-family:"IBM Plex Mono",monospace}
+.atbl td.mt{font-family:"IBM Plex Mono",monospace;font-size:var(--micro);color:var(--muted);font-variant-numeric:tabular-nums}
+.atbl td.mt span{display:block;margin-top:3px}
+.atbl td.mt .from{color:var(--ink-2)}
+.atbl td.mt .to{color:var(--accent);font-weight:500}
+.atbl td.to2{color:var(--accent);font-family:"IBM Plex Mono",monospace;font-size:var(--micro)}
+.atbl td.gain{font-family:"Chakra Petch",sans-serif;font-weight:600;color:var(--accent);white-space:nowrap}
+.atbl tr.grp td{border-top:1px solid var(--line)}
+.atbl tr.sum td{background:var(--panel-2);border-top:1px solid var(--line)}
+.wv{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:var(--micro);letter-spacing:.06em;
+  padding:1px 7px;border:1px solid;border-radius:2px;white-space:nowrap}
+.wv+em{display:block;font-style:normal;color:var(--muted);font-size:var(--micro);font-family:"IBM Plex Mono",monospace;margin-top:4px}
+.w1{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.w2{color:var(--warn);border-color:var(--warn)}
+.w3{color:var(--muted);border-color:var(--line)}
+
+/* ---- rhythm ---- */
+.rhythm{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.rcol{background:var(--panel);padding:20px;display:flex;flex-direction:column;gap:13px}
+.rcol h3{font-size:var(--h2);font-weight:600}
+.rcol>.goal{font-family:"IBM Plex Mono",monospace;font-size:var(--micro);color:var(--muted);letter-spacing:.04em;margin-top:-10px}
+.rline{display:grid;grid-template-columns:72px 1fr;gap:0 13px}
+.rtime{font-family:"IBM Plex Mono",monospace;font-size:var(--micro);color:var(--accent);font-variant-numeric:tabular-nums;padding-top:3px;white-space:nowrap}
+.rwhat{font-size:var(--small);line-height:1.55;color:var(--ink-2)}
+.rwhat b{color:var(--ink);font-weight:600}
+.note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);padding:13px 16px;font-size:var(--small);color:var(--ink-2);line-height:1.6}
+.gones{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.gone{background:var(--panel);padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.gone h3{font-size:var(--h2);font-weight:600;color:var(--muted)}
+.gone ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
+.gone li{font-size:var(--small);color:var(--muted);text-decoration:line-through;text-decoration-color:var(--crit);text-decoration-thickness:1px;line-height:1.5}
+
 /* ---- tabs ---- */
 [hidden]{display:none!important}
 .tabs{
@@ -175,6 +214,8 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
 
 <nav class="tabs" role="tablist" aria-label="หัวข้อในรายงาน">
   <button type="button" role="tab" id="tab-quickwin" data-target="quickwin" aria-controls="quickwin" aria-selected="false" tabindex="-1">ทำก่อน 3 เรื่อง/ทีม</button>
+  <button type="button" role="tab" id="tab-plan" data-target="plan" aria-controls="plan" aria-selected="false" tabindex="-1">ตาราง Action</button>
+  <button type="button" role="tab" id="tab-rhythm" data-target="rhythm" aria-controls="rhythm" aria-selected="false" tabindex="-1">จังหวะงานใหม่</button>
   <button type="button" role="tab" id="tab-matrix" data-target="matrix" aria-controls="matrix" aria-selected="false" tabindex="-1">ปัญหาซ้ำ × แผนก</button>
   <button type="button" role="tab" id="tab-themes" data-target="themes" aria-controls="themes" aria-selected="false" tabindex="-1">5 ปัญหาหลัก</button>
   <button type="button" role="tab" id="tab-depts" data-target="depts" aria-controls="depts" aria-selected="false" tabindex="-1">แยกตามแผนก</button>
@@ -301,6 +342,118 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
     </div>
   </div>
 </section>
+<section id="plan" class="panel" role="tabpanel" aria-labelledby="tab-plan">
+  <div class="sechead">
+    <h2>ตาราง Action รายสายงาน</h2>
+    <p>21 Action จาก 7 ทีม — ใครเป็นเจ้าของ ต้องการความร่วมมือจากใคร ลงมือได้ช่วงไหน และวัดผลด้วยอะไร · แบ่งเป็น 3 ระยะตามว่าต้องรออะไรก่อน ไม่ใช่ตามความสำคัญ</p>
+  </div>
+  <div class="scroll">
+  <table class="atbl">
+    <thead>
+      <tr><th class="lead">ทีม / เจ้าของ</th><th class="lead">Action</th><th class="lead">ต้องการความร่วมมือจาก</th><th class="lead">ระยะ</th><th class="lead">ตัววัด — ปัจจุบัน → เป้าหมาย</th></tr>
+    </thead>
+    <tbody>
+      <tr class="grp"><td class="tm" rowspan="3">DMS — ขายภายในประเทศ<em>ผจก.ขายภายในประเทศ</em></td><td class="ac"><b>Standing Order Agreement</b><em>ทำสัญญารอบสั่งซื้อกับลูกค้าประจำ</em></td><td class="dep">ทำได้เองในทีม</td><td><span class="wv w1">ระยะ 1</span><em>สัปดาห์ 1–2</em></td><td class="mt">เวลาโทรติดตามรายเดิม<span><span class="from">1–2 ชม./วัน</span> → <span class="to">≤ 30 นาที/วัน</span></span></td></tr>
+      <tr><td class="ac"><b>Early Stock Visibility</b><em>ให้คลังส่งรายการ No Order ตั้งแต่เช้า</em></td><td class="dep">คลัง/โลจิสติกส์</td><td><span class="wv w2">ระยะ 2</span><em>สัปดาห์ 3–6</em></td><td class="mt">เวลาเร่งระบายของในวัน<span><span class="from">3 ชม./วัน</span> → <span class="to">≤ 1 ชม./วัน</span></span></td></tr>
+      <tr><td class="ac"><b>Single Source of Truth</b><em>รวมไฟล์สต็อกฟรีสเหลือแหล่งเดียว</em></td><td class="dep">คลัง + IT</td><td><span class="wv w3">ระยะ 3</span><em>สัปดาห์ 7–12</em></td><td class="mt">เวลาเช็คสต็อกซ้ำ<span><span class="from">30 นาที/วัน</span> → <span class="to">0</span></span></td></tr>
+      <tr class="grp"><td class="tm" rowspan="3">FSC — Food Supply Chain<em>ผจก. FSC</em></td><td class="ac"><b>Meeting Cadence Reset</b><em>ลดประชุม KPI/ปรับปรุงงานเป็น 2 สัปดาห์/ครั้ง</em></td><td class="dep">หัวหน้าสายงาน</td><td><span class="wv w1">ระยะ 1</span><em>สัปดาห์ 1–2</em></td><td class="mt">เวลาประชุมนอกรอบ<span><span class="from">2–3 ชม./สัปดาห์</span> → <span class="to">≤ 1 ชม./2 สัปดาห์</span></span></td></tr>
+      <tr><td class="ac"><b>Customer Onboarding Pack</b><em>ยุบเอกสารเปิดบัญชี + ขอเครดิตเหลือชุดเดียว</em></td><td class="dep">นิติกร + บัญชี</td><td><span class="wv w2">ระยะ 2</span><em>สัปดาห์ 3–6</em></td><td class="mt">ลูกค้าใหม่ที่หลุดเพราะเอกสาร<span><span class="from">เสียโอกาสประจำ</span> → <span class="to">0 ราย/เดือน</span></span></td></tr>
+      <tr><td class="ac"><b>NPD Costing Template</b><em>ล็อกสูตรคำนวณราคา NPD ไว้ที่เดียว</em></td><td class="dep">RD + บัญชีต้นทุน</td><td><span class="wv w2">ระยะ 2</span><em>สัปดาห์ 3–6</em></td><td class="mt">เวลาทำราคา NPD ต่อสินค้า<span><span class="from">เกือบทั้งวัน</span> → <span class="to">ลดครึ่ง</span></span></td></tr>
+      <tr class="grp"><td class="tm" rowspan="3">ขายต่างประเทศ / EPA<em>ผจก.ฝ่ายขายต่างประเทศ</em></td><td class="ac"><b>Approval Matrix</b><em>เขียนเกณฑ์มอบอำนาจหนึ่งหน้า</em></td><td class="dep">หัวหน้าสายงาน</td><td><span class="wv w1">ระยะ 1</span><em>สัปดาห์ 1–2</em></td><td class="mt">เรื่องที่ต้องขออนุมัติ<span><span class="from">เกือบทุกเรื่อง</span> → <span class="to">≤ 30%</span></span></td></tr>
+      <tr><td class="ac"><b>Definition of Done</b><em>ตกลงเช็คลิสต์ส่งมอบระหว่างแผนก</em></td><td class="dep">RD + ประสานงาน + คลัง</td><td><span class="wv w1">ระยะ 1</span><em>สัปดาห์ 1–2</em></td><td class="mt">เวลาตรวจงานของหัวหน้าทีม<span><span class="from">2–3 ชม./วัน</span> → <span class="to">≤ 1 ชม./วัน</span></span></td></tr>
+      <tr><td class="ac"><b>Self-Service Container Calculator</b><em>ทำเครื่องมือคำนวณตู้ให้ฝ่ายขายกดเอง</em></td><td class="dep">RD + IT</td><td><span class="wv w3">ระยะ 3</span><em>สัปดาห์ 7–12</em></td><td class="mt">การรอ RD คำนวณตู้<span><span class="from">ทุกวัน</span> → <span class="to">0</span></span></td></tr>
+      <tr class="grp"><td class="tm" rowspan="3">ประสานงานขายต่างประเทศ + Shipping<em>ผจก.แผนกประสานงานขายต่างประเทศ</em></td><td class="ac"><b>Document Freeze Point</b><em>ล็อก Booking ก่อนเริ่มงานเอกสาร</em></td><td class="dep">จัดซื้อ</td><td><span class="wv w1">ระยะ 1</span><em>สัปดาห์ 1–2</em></td><td class="mt">Rev. เอกสารหลังทำเสร็จ<span><span class="from">3–4 ครั้ง/สัปดาห์</span> → <span class="to">≤ 1 ครั้ง/สัปดาห์</span></span></td></tr>
+      <tr><td class="ac"><b>Cut-off Time</b><em>แจ้งฟอร์มตู้ล่วงหน้า 7 วันก่อนโหลด</em></td><td class="dep">ทีมวางแผน + ทีมโหลด</td><td><span class="wv w1">ระยะ 1</span><em>สัปดาห์ 1–2</em></td><td class="mt">งานด่วนที่แจ้งข้ามคืน<span><span class="from">ทุกสัปดาห์</span> → <span class="to">≤ 1 ครั้ง/เดือน</span></span></td></tr>
+      <tr><td class="ac"><b>Shipping Document Instruction</b><em>ทำฟอร์มเก็บเงื่อนไขลูกค้าตั้งแต่เปิดบัญชี</em></td><td class="dep">ฝ่ายขายต่างประเทศ</td><td><span class="wv w2">ระยะ 2</span><em>สัปดาห์ 3–6</em></td><td class="mt">รอบถาม-ตอบ Requirement ลูกค้าใหม่<span><span class="from">หลายรอบ</span> → <span class="to">≤ 1 รอบ</span></span></td></tr>
+      <tr class="grp"><td class="tm" rowspan="3">ประสานงานขายภายในประเทศ<em>ผจก.ฝ่ายประสานงานขาย</em></td><td class="ac"><b>Centralized Case Tracking</b><em>ตั้งทะเบียนเคสเบี่ยงเบน Owner + SLA</em></td><td class="dep">ผลิต + QA + คลัง + โลจิสติกส์</td><td><span class="wv w1">ระยะ 1</span><em>สัปดาห์ 1–2</em></td><td class="mt">เวลาปิดเคสเบี่ยงเบน<span><span class="from">1–2 วัน/เคส</span> → <span class="to">≤ 4 ชม./เคส</span></span></td></tr>
+      <tr><td class="ac"><b>Workflow Management</b><em>กำหนด Lead Time + Cut-off การรับงานแทรก</em></td><td class="dep">ฝ่ายขาย + ลูกค้า</td><td><span class="wv w1">ระยะ 1</span><em>สัปดาห์ 1–2</em></td><td class="mt">งานแทรกที่ทำให้แผนพัง<span><span class="from">ทุกวัน</span> → <span class="to">≤ 1 ครั้ง/สัปดาห์</span></span></td></tr>
+      <tr><td class="ac"><b>Single Source of Truth</b><em>รวม Master Data — Stock จริง, RM, ราคา</em></td><td class="dep">IT + ผลิต + จัดซื้อ</td><td><span class="wv w3">ระยะ 3</span><em>สัปดาห์ 7–12</em></td><td class="mt">เวลาทำรายงาน/ค้นข้อมูล<span><span class="from">30–90 นาที/ครั้ง</span> → <span class="to">≤ 10 นาที</span></span></td></tr>
+      <tr class="grp"><td class="tm" rowspan="3">คลังสินค้าและโลจิสติกส์ / DMC<em>ผจก.ฝ่ายคลังและโลจิสติกส์</em></td><td class="ac"><b>Pre-Dispatch Verification</b><em>ตั้งจุดตรวจยืนยันรายการก่อนจ่าย</em></td><td class="dep">ทำได้เองในทีม</td><td><span class="wv w1">ระยะ 1</span><em>สัปดาห์ 1–2</em></td><td class="mt">จัด-จ่ายผิด/ไม่ครบ<span><span class="from">ทุกสัปดาห์</span> → <span class="to">≤ 1 ครั้ง/เดือน</span></span></td></tr>
+      <tr><td class="ac"><b>Preventive Maintenance</b><em>ทำ PM รถตามรอบ + เตรียมรถสำรอง</em></td><td class="dep">ช่าง + จัดซื้อ</td><td><span class="wv w2">ระยะ 2</span><em>สัปดาห์ 3–6</em></td><td class="mt">รถเสียระหว่างจัดส่ง<span><span class="from">หลายครั้ง/เดือน</span> → <span class="to">0 ครั้ง/เดือน</span></span></td></tr>
+      <tr><td class="ac"><b>Real-time Production Status</b><em>ให้หน้างานเห็นสถานะสินค้าจากผลิตเอง</em></td><td class="dep">ผลิต + IT</td><td><span class="wv w3">ระยะ 3</span><em>สัปดาห์ 7–12</em></td><td class="mt">เวลาไล่ตามสินค้าจากผลิต<span><span class="from">1–3 ชม./วัน</span> → <span class="to">≤ 30 นาที/วัน</span></span></td></tr>
+      <tr class="grp"><td class="tm" rowspan="3">การตลาดออนไลน์<em>รักษาการ ผจก.การตลาดออนไลน์</em></td><td class="ac"><b>Pre-approved Promotion Framework</b><em>อนุมัติกรอบโปรโมชั่นล่วงหน้ารายเดือน</em></td><td class="dep">หัวหน้าสายงาน</td><td><span class="wv w1">ระยะ 1</span><em>สัปดาห์ 1–2</em></td><td class="mt">เวลารออนุมัติโปรโมชั่น<span><span class="from">1 สัปดาห์</span> → <span class="to">≤ 2 วัน</span></span></td></tr>
+      <tr><td class="ac"><b>Role Split</b><em>แยกบทบาทการตลาดกับคอนเทนต์</em></td><td class="dep">HR + หัวหน้าสายงาน</td><td><span class="wv w1">ระยะ 1</span><em>สัปดาห์ 1–2</em></td><td class="mt">งานที่หลุดเพราะดูคนเดียว<span><span class="from">มีประจำ</span> → <span class="to">0</span></span></td></tr>
+      <tr><td class="ac"><b>Self-Service Order Lookup</b><em>เปิดสิทธิ์ให้การตลาดดูสถานะออเดอร์เอง</em></td><td class="dep">ประสานงานขาย + IT</td><td><span class="wv w3">ระยะ 3</span><em>สัปดาห์ 7–12</em></td><td class="mt">เวลาถามข้อมูลจากประสานงานขาย<span><span class="from">1–2 ชม./วัน</span> → <span class="to">≤ 20 นาที/วัน</span></span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="legend">
+    <i><span class="wv w1">ระยะ 1</span> สัปดาห์ 1–2 · ตกลงกันได้เลย ไม่ต้องสร้างระบบ</i>
+    <i><span class="wv w2">ระยะ 2</span> สัปดาห์ 3–6 · ต้องตกลงข้ามแผนกหรือแก้เอกสาร</i>
+    <i><span class="wv w3">ระยะ 3</span> สัปดาห์ 7–12 · ต้องสร้างเครื่องมือหรือเชื่อมระบบ</i>
+  </div>
+</section>
+
+<section id="rhythm" class="panel" role="tabpanel" aria-labelledby="tab-rhythm">
+  <div class="sechead">
+    <h2>จังหวะงานใหม่ — เมื่อทำครบทุก Action แล้ว</h2>
+    <p>หน้าตาของวันและสัปดาห์หลังจาก 21 Action เดินครบ · ไม่ใช่ตารางงานที่ต้องทำเพิ่ม แต่เป็นจังหวะที่ควรเหลืออยู่เมื่องานไล่ตามและงานซ้ำถูกตัดออกไปแล้ว</p>
+  </div>
+  <div class="rhythm">
+    <div class="rcol">
+      <h3>รายวัน</h3>
+      <div class="goal">6 จุดตัดรอบ แทนการรับงานตลอดวัน</div>
+      <div class="rline"><div class="rtime">08.00</div><div class="rwhat"><b>เปิด Dashboard กลาง 10 นาที</b> — Stock จริง, RM, No Order, ตู้ใกล้ ETD, เคสค้าง · ไม่ต้องถามใครก่อนเริ่มงาน</div></div>
+      <div class="rline"><div class="rtime">08.30</div><div class="rwhat"><b>เปิดทะเบียนเคสของวัน</b> — เคสใหม่ได้ Owner และ SLA ทันทีที่บันทึก เจ้าของกระบวนการรับไปปิดเอง</div></div>
+      <div class="rline"><div class="rtime">09.00</div><div class="rwhat"><b>งานขายและงานเอกสารเดินตามแผนที่ล็อกไว้</b> — งานที่อยู่ในกรอบ Approval Matrix ทีมตัดสินใจจบเอง ไม่ต้องขอ</div></div>
+      <div class="rline"><div class="rtime">11.00</div><div class="rwhat"><b>รอบอนุมัติที่ 1</b> — เฉพาะเรื่องที่เกินกรอบ รวบเป็นรอบเดียว ไม่ยิงเข้ามาทั้งวัน</div></div>
+      <div class="rline"><div class="rtime">16.30</div><div class="rwhat"><b>รอบอนุมัติที่ 2 + Cut-off รับงานด่วน</b> — งานที่แจ้งหลังเวลานี้ เข้าคิววันถัดไป ไม่แทรกแผนที่วางไว้</div></div>
+      <div class="rline"><div class="rtime">17.30</div><div class="rwhat"><b>ปิดเคสที่ครบ SLA</b> — เคสที่ยังค้างส่งต่อพร้อมเหตุผล ไม่ค้างข้ามวันแบบไม่มีเจ้าของ</div></div>
+    </div>
+    <div class="rcol">
+      <h3>รายสัปดาห์</h3>
+      <div class="goal">แต่ละวันมีรอบของตัวเอง ไม่ปนกัน</div>
+      <div class="rline"><div class="rtime">จันทร์</div><div class="rwhat"><b>ล็อกแผนสัปดาห์</b> — ไก่เข้าเชือด ฐานออเดอร์ และตู้ที่จะโหลด ยืนยันครั้งเดียว ไม่ปรับรายวัน</div></div>
+      <div class="rline"><div class="rtime">อังคาร</div><div class="rwhat"><b>รอบ NPD และเสนอราคา</b> — ใช้เทมเพลตคำนวณชุดเดียว ข้อมูลต้นทุนดึงจากฐานกลาง</div></div>
+      <div class="rline"><div class="rtime">พุธ</div><div class="rwhat"><b>ทบทวนเคสที่เกิดซ้ำ</b> — ดูเฉพาะเคสที่กลับมาอีก แก้ที่ต้นเหตุ ไม่ไล่แก้รายเคส</div></div>
+      <div class="rline"><div class="rtime">พฤหัส</div><div class="rwhat"><b>รอบเปิดลูกค้าใหม่</b> — เอกสารเปิดบัญชีชุดเดียว ติดตามเป็นรายการ ไม่ปล่อยค้าง</div></div>
+      <div class="rline"><div class="rtime">ศุกร์</div><div class="rwhat"><b>ประชุมตัดสินใจ 45 นาที</b> — ตัวเลขเข้าระบบเองล่วงหน้า ในห้องคุยเฉพาะเรื่องที่ไม่ถึงเป้าหรือยังติด</div></div>
+      <div class="rline"><div class="rtime">ทุก 2 สัปดาห์</div><div class="rwhat"><b>ประชุมปรับปรุงงาน / KPI</b> — แทนรอบรายสัปดาห์เดิม</div></div>
+    </div>
+  </div>
+
+  <div class="sechead" style="margin-top:12px">
+    <h2>เวลาที่คืนมา</h2>
+    <p>คำนวณจากตัววัดของทุก Action รวมกัน สำหรับตำแหน่งที่แบกงานไล่ตามมากที่สุด — หัวหน้าทีมและผู้ประสานงาน</p>
+  </div>
+  <div class="scroll">
+  <table class="atbl">
+    <thead><tr><th class="lead">งานที่กินเวลา</th><th class="lead">ปัจจุบัน/วัน</th><th class="lead">หลังทำครบ</th><th class="lead">คืนมา</th></tr></thead>
+    <tbody>
+      <tr><td class="lead">ไล่ตามข้อมูล/ทวงงาน</td><td>1–1.5 ชม.</td><td class="to2">≤ 20 นาที</td><td class="gain">~1 ชม.</td></tr>
+      <tr><td class="lead">ประชุม</td><td>1–2 ชม.</td><td class="to2">≤ 45 นาที</td><td class="gain">~45 นาที</td></tr>
+      <tr><td class="lead">ตรวจงานซ้ำ / แก้ rework</td><td>1–3 ชม.</td><td class="to2">ลดครึ่ง</td><td class="gain">~1 ชม.</td></tr>
+      <tr><td class="lead">รวบรวมข้อมูลก่อนทำงาน</td><td>30–60 นาที</td><td class="to2">≤ 10 นาที</td><td class="gain">~30 นาที</td></tr>
+      <tr><td class="lead">คีย์ Scoreboard</td><td>30 นาที</td><td class="to2">0</td><td class="gain">30 นาที</td></tr>
+      <tr class="sum"><td class="lead"><b>รวม</b></td><td>—</td><td>—</td><td class="gain"><b>~3–3.5 ชม./คน/วัน</b></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="note">เวลาที่คืนมาควรไปลงที่งานซึ่งทุกแผนกบอกตรงกันว่าถูกเบียดออกก่อนเสมอ — <b>หาลูกค้าใหม่ · พัฒนาสินค้า (NPD) · สอนทีม</b> ถ้าไม่กำหนดไว้ล่วงหน้า เวลาที่ว่างจะถูกงานประจำกลืนกลับไปเหมือนเดิม</div>
+
+  <div class="gones">
+    <div class="gone">
+      <h3>หายไปจากทุกวัน</h3>
+      <ul>
+        <li>ไล่ตามข้อมูลในไลน์กลุ่ม 1–1.5 ชม./วัน</li>
+        <li>คีย์ Scoreboard ย้อนหลังด้วยมือ 30 นาที/วัน</li>
+        <li>ตรวจงานที่ทีมส่งมาทุกรายการ 2–3 ชม./วัน</li>
+        <li>โทรตามลูกค้าเดิมที่ไม่สั่งตามรอบ 1–2 ชม./วัน</li>
+        <li>เร่งหาที่ระบายสินค้า No Order ในวัน 3 ชม./วัน</li>
+      </ul>
+    </div>
+    <div class="gone">
+      <h3>หายไปจากทุกสัปดาห์</h3>
+      <ul>
+        <li>ประชุมรายงานตัวเลข 1–2 ชม./วัน</li>
+        <li>ปรับแผนรายวันทั้งที่ตกลงเป็นรายสัปดาห์</li>
+        <li>ทำรายงานชุดเดียวกันหลายคนหลายช่องทาง</li>
+        <li>ทำเอกสารตู้ใหม่ทั้งชุดเพราะ Booking เปลี่ยน</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <section id="matrix" class="panel" role="tabpanel" aria-labelledby="tab-matrix">
   <div class="sechead">
     <h2>แผนผังปัญหาซ้ำ × แผนก</h2>
