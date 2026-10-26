@@ -185,6 +185,32 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
 .gone ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
 .gone li{font-size:var(--small);color:var(--muted);text-decoration:line-through;text-decoration-color:var(--crit);text-decoration-thickness:1px;line-height:1.5}
 
+/* ---- day schedule ---- */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.rule{background:var(--panel);padding:14px 16px;font-size:var(--small);color:var(--ink-2);line-height:1.55}
+.rule b{display:block;color:var(--ink);font-weight:600;margin-bottom:4px}
+.days{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.day{background:var(--panel);padding:20px;display:flex;flex-direction:column;gap:12px}
+.day h3{font-size:var(--h2);font-weight:600}
+.day>.goal{font-family:"IBM Plex Mono",monospace;font-size:var(--micro);color:var(--muted);letter-spacing:.03em;line-height:1.5;margin-top:-9px}
+.slots{display:flex;flex-direction:column;border-top:1px solid var(--line-soft)}
+.slot{display:grid;grid-template-columns:92px 1fr;gap:0 12px;padding:7px 0 7px 11px;
+  border-left:2px solid transparent;border-bottom:1px solid var(--line-soft);align-items:baseline}
+.slot:last-child{border-bottom:0}
+.sh{font-family:"IBM Plex Mono",monospace;font-size:var(--micro);color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.sw{font-size:var(--small);line-height:1.5;color:var(--ink-2)}
+.slot.focus{border-left-color:var(--accent);background:var(--accent-soft)}
+.slot.focus .sw{color:var(--ink);font-weight:600}
+.slot.focus .sh{color:var(--accent)}
+.slot.round{border-left-color:var(--warn)}
+.slot.round .sh{color:var(--warn)}
+.slot.people{border-left-color:var(--ok)}
+.slot.people .sh{color:var(--ok)}
+.lg{display:inline-block;width:12px;height:12px;border-radius:2px;border-left:3px solid var(--line);background:var(--panel-2)}
+.lg.focus{border-left-color:var(--accent);background:var(--accent-soft)}
+.lg.round{border-left-color:var(--warn)}
+.lg.people{border-left-color:var(--ok)}
+
 /* ---- tabs ---- */
 [hidden]{display:none!important}
 .tabs{
@@ -216,6 +242,7 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
   <button type="button" role="tab" id="tab-quickwin" data-target="quickwin" aria-controls="quickwin" aria-selected="false" tabindex="-1">ทำก่อน 3 เรื่อง/ทีม</button>
   <button type="button" role="tab" id="tab-plan" data-target="plan" aria-controls="plan" aria-selected="false" tabindex="-1">ตาราง Action</button>
   <button type="button" role="tab" id="tab-rhythm" data-target="rhythm" aria-controls="rhythm" aria-selected="false" tabindex="-1">จังหวะงานใหม่</button>
+  <button type="button" role="tab" id="tab-day" data-target="day" aria-controls="day" aria-selected="false" tabindex="-1">ตารางวันรายตำแหน่ง</button>
   <button type="button" role="tab" id="tab-matrix" data-target="matrix" aria-controls="matrix" aria-selected="false" tabindex="-1">ปัญหาซ้ำ × แผนก</button>
   <button type="button" role="tab" id="tab-themes" data-target="themes" aria-controls="themes" aria-selected="false" tabindex="-1">5 ปัญหาหลัก</button>
   <button type="button" role="tab" id="tab-depts" data-target="depts" aria-controls="depts" aria-selected="false" tabindex="-1">แยกตามแผนก</button>
@@ -397,7 +424,8 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
       <div class="rline"><div class="rtime">08.30</div><div class="rwhat"><b>เปิดทะเบียนเคสของวัน</b> — เคสใหม่ได้ Owner และ SLA ทันทีที่บันทึก เจ้าของกระบวนการรับไปปิดเอง</div></div>
       <div class="rline"><div class="rtime">09.00</div><div class="rwhat"><b>งานขายและงานเอกสารเดินตามแผนที่ล็อกไว้</b> — งานที่อยู่ในกรอบ Approval Matrix ทีมตัดสินใจจบเอง ไม่ต้องขอ</div></div>
       <div class="rline"><div class="rtime">11.00</div><div class="rwhat"><b>รอบอนุมัติที่ 1</b> — เฉพาะเรื่องที่เกินกรอบ รวบเป็นรอบเดียว ไม่ยิงเข้ามาทั้งวัน</div></div>
-      <div class="rline"><div class="rtime">16.30</div><div class="rwhat"><b>รอบอนุมัติที่ 2 + Cut-off รับงานด่วน</b> — งานที่แจ้งหลังเวลานี้ เข้าคิววันถัดไป ไม่แทรกแผนที่วางไว้</div></div>
+      <div class="rline"><div class="rtime">15.00</div><div class="rwhat"><b>รอบอนุมัติที่ 2 (รอบปิด)</b> — เรื่องที่ไม่เข้ารอบนี้ ไปต่อวันถัดไป</div></div>
+      <div class="rline"><div class="rtime">16.30</div><div class="rwhat"><b>Cut-off รับงานด่วน</b> — งานที่แจ้งหลังเวลานี้ เข้าคิววันถัดไป ไม่แทรกแผนที่วางไว้</div></div>
       <div class="rline"><div class="rtime">17.30</div><div class="rwhat"><b>ปิดเคสที่ครบ SLA</b> — เคสที่ยังค้างส่งต่อพร้อมเหตุผล ไม่ค้างข้ามวันแบบไม่มีเจ้าของ</div></div>
     </div>
     <div class="rcol">
@@ -452,6 +480,161 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
       </ul>
     </div>
   </div>
+</section>
+
+<section id="day" class="panel" role="tabpanel" aria-labelledby="tab-day">
+  <div class="sechead">
+    <h2>ตารางวันใหม่ — รายตำแหน่ง</h2>
+    <p>ลงเป็นชั่วโมงจริงว่าแต่ละตำแหน่งควรใช้วันอย่างไรเมื่อ 21 Action เดินครบ · เวลาทำงานยึดตามที่แต่ละทีมกรอกมาเอง · บล็อกเขียว “ห้ามขัด” คืองานที่สร้างยอดและสร้างคน ซึ่งเดิมเป็นงานที่ถูกตัดออกก่อนเสมอ</p>
+  </div>
+  <div class="rules">
+    <div class="rule"><b>1. บล็อกห้ามขัด คือข้อตกลงของทีม ไม่ใช่ความตั้งใจส่วนตัว</b>ถ้าไม่ประกาศร่วมกันว่าช่วงนี้ไม่รับงานแทรก บล็อกนี้จะถูกกินภายในสัปดาห์แรก</div>
+    <div class="rule"><b>2. งานขออนุมัติรวบเป็น 2 รอบ — 11.00 และ 15.00</b>เรื่องที่อยู่ในกรอบ Approval Matrix ไม่ต้องเข้ารอบ ตัดสินใจจบที่ทีมได้เลย</div>
+    <div class="rule"><b>3. ★ เปิดโต๊ะหารือ แทนการถูกถามทั้งวัน</b>คำถามที่ไม่ด่วนรอรอบนี้ได้ หัวหน้าจึงได้บล็อกยาวคืนมา และทีมก็รู้ว่าถามได้เมื่อไหร่</div>
+  </div>
+  <div class="days">
+    <div class="day">
+      <h3>ผจก.ฝ่ายขายต่างประเทศ</h3>
+      <div class="goal">08.30–18.00 · หลักของวัน: ตัดสินใจให้ทีมเดินต่อได้ ไม่ใช่เป็นคอขวด</div>
+      <div class="slots">
+        <div class="slot "><div class="sh">08.30–09.00</div><div class="sw">เปิดวัน อ่าน Scoreboard ที่ดึงข้อมูลเอง</div></div>
+        <div class="slot "><div class="sh">09.00–09.30</div><div class="sw">4DX</div></div>
+        <div class="slot focus"><div class="sh">09.30–11.00</div><div class="sw">งานสร้างยอด — ห้ามขัด</div></div>
+        <div class="slot round"><div class="sh">11.00–11.30</div><div class="sw">รอบอนุมัติที่ 1</div></div>
+        <div class="slot "><div class="sh">11.30–12.00</div><div class="sw">ลูกค้าสำคัญ + จุดตัดสินใจ NPD</div></div>
+        <div class="slot "><div class="sh">13.00–13.30</div><div class="sw">Co-sales / เคสเบี่ยงเบน</div></div>
+        <div class="slot focus"><div class="sh">13.30–15.00</div><div class="sw">บล็อกยาว ลูกค้า / ปรับปรุงงาน — ห้ามขัด</div></div>
+        <div class="slot round"><div class="sh">15.00–15.30</div><div class="sw">รอบอนุมัติที่ 2 (รอบปิด)</div></div>
+        <div class="slot people"><div class="sh">15.30–16.30</div><div class="sw">★ เปิดโต๊ะหารือ 1 ชม.</div></div>
+        <div class="slot people"><div class="sh">16.30–17.30</div><div class="sw">สอนทีมและตรวจงานเชิงสอน</div></div>
+        <div class="slot "><div class="sh">17.30–18.00</div><div class="sw">งานขายออนไลน์ + สรุปวัน</div></div>
+      </div>
+    </div>
+    <div class="day">
+      <h3>หัวหน้าทีมขายต่างประเทศ</h3>
+      <div class="goal">08.30–18.00 · หลักของวัน: ลูกค้า A Grade และลูกค้าใหม่ ต้องไม่ถูกตัดทิ้งก่อน</div>
+      <div class="slots">
+        <div class="slot "><div class="sh">08.30–09.00</div><div class="sw">เปิดวัน ดูคิวงานและตู้ใกล้ ETD</div></div>
+        <div class="slot "><div class="sh">09.00–09.30</div><div class="sw">4DX</div></div>
+        <div class="slot focus"><div class="sh">09.30–11.30</div><div class="sw">ดูแลลูกค้า A Grade — ห้ามขัด</div></div>
+        <div class="slot round"><div class="sh">11.30–12.00</div><div class="sw">ส่งเรื่องเข้ารอบอนุมัติ + ตามผล</div></div>
+        <div class="slot focus"><div class="sh">13.00–14.00</div><div class="sw">เปิดลูกค้าใหม่ — ห้ามขัด</div></div>
+        <div class="slot "><div class="sh">14.00–15.00</div><div class="sw">ตรวจงานตามเช็คลิสต์ เฉพาะจุดเสี่ยง ไม่ตรวจทุกรายการ</div></div>
+        <div class="slot round"><div class="sh">15.00–15.30</div><div class="sw">รอบอนุมัติที่ 2</div></div>
+        <div class="slot people"><div class="sh">15.30–16.30</div><div class="sw">สอนงานทีม + ตอบคำถามเป็นรอบ</div></div>
+        <div class="slot round"><div class="sh">16.30–17.00</div><div class="sw">Cut-off รับงานด่วนของพรุ่งนี้</div></div>
+        <div class="slot "><div class="sh">17.00–18.00</div><div class="sw">ปรับปรุงงาน + สรุปวัน</div></div>
+      </div>
+    </div>
+    <div class="day">
+      <h3>ขายภายในประเทศ (DMS)</h3>
+      <div class="goal">08.00–18.00 · หลักของวัน: ฐานออเดอร์ต้อง cover ของที่ออก</div>
+      <div class="slots">
+        <div class="slot "><div class="sh">08.00–08.20</div><div class="sw">เปิดวัน อ่านรายการ No Order + สต็อกจากไฟล์กลาง</div></div>
+        <div class="slot "><div class="sh">08.20–09.00</div><div class="sw">วางคิวโทรของวัน จัดลำดับลูกค้าที่ต้องปิด</div></div>
+        <div class="slot focus"><div class="sh">09.00–11.00</div><div class="sw">เสนอขายลูกค้าใหม่ — ห้ามขัด</div></div>
+        <div class="slot round"><div class="sh">11.00–11.30</div><div class="sw">รอบอนุมัติที่ 1 (ราคา/เงื่อนไขนอกกรอบ)</div></div>
+        <div class="slot "><div class="sh">11.30–12.00</div><div class="sw">ติดตามลูกค้าตามรอบสัญญา ไม่โทรไล่รายวัน</div></div>
+        <div class="slot focus"><div class="sh">13.00–14.30</div><div class="sw">ขยายยอดลูกค้าฐาน เสนอรายการเพิ่ม — ห้ามขัด</div></div>
+        <div class="slot "><div class="sh">14.30–15.00</div><div class="sw">เคสคุณภาพ/เคลม ส่งเข้าทะเบียนเคส ไม่ตามเอง</div></div>
+        <div class="slot round"><div class="sh">15.00–15.30</div><div class="sw">รอบอนุมัติที่ 2</div></div>
+        <div class="slot "><div class="sh">15.30–16.30</div><div class="sw">เคลียร์สินค้า No Order ที่เหลือ รอบเดียว</div></div>
+        <div class="slot "><div class="sh">16.30–17.30</div><div class="sw">แพลนไก่เข้าเชือดสัปดาห์ถัดไป (จันทร์) / เก็บข้อมูลตลาด</div></div>
+        <div class="slot "><div class="sh">17.30–18.00</div><div class="sw">สรุปวัน</div></div>
+      </div>
+    </div>
+    <div class="day">
+      <h3>ผจก. FSC — Food Supply Chain</h3>
+      <div class="goal">08.00–17.00 · หลักของวัน: เปิดลูกค้าใหม่และปิด NPD ให้เดิน</div>
+      <div class="slots">
+        <div class="slot "><div class="sh">08.00–08.20</div><div class="sw">เปิดวัน ดู Dashboard ลูกค้าที่ต่ำกว่าแผน</div></div>
+        <div class="slot "><div class="sh">08.20–09.00</div><div class="sw">ตอบลูกค้าที่ค้างจากเมื่อวาน รอบเดียว</div></div>
+        <div class="slot focus"><div class="sh">09.00–11.00</div><div class="sw">เสนอราคา + เปิดลูกค้าใหม่ — ห้ามขัด</div></div>
+        <div class="slot round"><div class="sh">11.00–11.30</div><div class="sw">รอบอนุมัติที่ 1</div></div>
+        <div class="slot "><div class="sh">11.30–12.00</div><div class="sw">NPD — ใช้เทมเพลตคำนวณชุดเดียว</div></div>
+        <div class="slot "><div class="sh">13.00–14.00</div><div class="sw">ติดตามลูกค้าฐานที่ยอดไม่ถึงแผน</div></div>
+        <div class="slot "><div class="sh">14.00–15.00</div><div class="sw">เอกสารเปิดบัญชีลูกค้าใหม่ รอบเดียว</div></div>
+        <div class="slot round"><div class="sh">15.00–15.30</div><div class="sw">รอบอนุมัติที่ 2</div></div>
+        <div class="slot people"><div class="sh">15.30–16.30</div><div class="sw">★ สอนทีม + เปิดโต๊ะหารือ</div></div>
+        <div class="slot "><div class="sh">16.30–17.00</div><div class="sw">สรุปวัน</div></div>
+      </div>
+    </div>
+    <div class="day">
+      <h3>ประสานงานขายต่างประเทศ + Shipping</h3>
+      <div class="goal">08.00–18.00 · หลักของวัน: ออกเอกสารจบในรอบเดียว</div>
+      <div class="slots">
+        <div class="slot "><div class="sh">08.00–08.20</div><div class="sw">เปิดวัน ดูตู้ใกล้ ETD + งานเอกสารค้าง</div></div>
+        <div class="slot focus"><div class="sh">08.20–09.30</div><div class="sw">ออกเอกสารชุดที่ข้อมูลล็อกแล้ว — ห้ามขัด</div></div>
+        <div class="slot "><div class="sh">09.30–10.30</div><div class="sw">ตรวจ Draft LC / SC ตามเช็คลิสต์</div></div>
+        <div class="slot "><div class="sh">10.30–11.00</div><div class="sw">ลูกค้าใหม่ — ใช้เงื่อนไขจากฟอร์ม Instruction</div></div>
+        <div class="slot round"><div class="sh">11.00–11.30</div><div class="sw">รอบอนุมัติที่ 1</div></div>
+        <div class="slot round"><div class="sh">11.30–12.00</div><div class="sw">ยืนยัน Booking กับจัดซื้อ — ล็อกก่อนเริ่มเอกสาร</div></div>
+        <div class="slot focus"><div class="sh">13.00–15.00</div><div class="sw">ออกเอกสารรอบบ่าย — ห้ามขัด</div></div>
+        <div class="slot round"><div class="sh">15.00–15.30</div><div class="sw">รอบอนุมัติที่ 2</div></div>
+        <div class="slot people"><div class="sh">15.30–16.30</div><div class="sw">★ เคสเบี่ยงเบน + เปิดโต๊ะหารือ</div></div>
+        <div class="slot round"><div class="sh">16.30–17.00</div><div class="sw">Cut-off รับงานโหลดของวันถัดไป</div></div>
+        <div class="slot people"><div class="sh">17.00–18.00</div><div class="sw">สอนทีม + สรุปวัน</div></div>
+      </div>
+    </div>
+    <div class="day">
+      <h3>ผจก.ฝ่ายประสานงานขายภายในประเทศ</h3>
+      <div class="goal">08.00–18.00 · หลักของวัน: มอบเคสให้เจ้าของ ไม่รับมาตามเอง</div>
+      <div class="slots">
+        <div class="slot "><div class="sh">08.00–08.20</div><div class="sw">เปิดวัน ดูทะเบียนเคสค้าง + Stock จริง</div></div>
+        <div class="slot round"><div class="sh">08.20–09.00</div><div class="sw">มอบ Owner + SLA ให้เคสใหม่ ไม่รับมาตามเอง</div></div>
+        <div class="slot focus"><div class="sh">09.00–11.00</div><div class="sw">จัดสรรการขาย + แผนส่งมอบ — ห้ามขัด</div></div>
+        <div class="slot round"><div class="sh">11.00–11.30</div><div class="sw">รอบอนุมัติที่ 1</div></div>
+        <div class="slot "><div class="sh">11.30–12.00</div><div class="sw">ออก SC / ตรวจแผนส่งมอบ</div></div>
+        <div class="slot round"><div class="sh">13.00–14.00</div><div class="sw">รอบรับงานแทรก — รวบเป็นรอบเดียวตาม Lead time</div></div>
+        <div class="slot focus"><div class="sh">14.00–15.00</div><div class="sw">เสนอขายสินค้าเพิ่ม / สินค้าทดแทน — ห้ามขัด</div></div>
+        <div class="slot round"><div class="sh">15.00–15.30</div><div class="sw">รอบอนุมัติที่ 2</div></div>
+        <div class="slot people"><div class="sh">15.30–16.30</div><div class="sw">★ ทบทวนเคสที่เกิดซ้ำ + เปิดโต๊ะหารือ</div></div>
+        <div class="slot people"><div class="sh">16.30–17.30</div><div class="sw">สอนทีม</div></div>
+        <div class="slot "><div class="sh">17.30–18.00</div><div class="sw">ปิดเคสที่ครบ SLA + สรุปวัน</div></div>
+      </div>
+    </div>
+    <div class="day">
+      <h3>ผจก.ฝ่ายคลังและโลจิสติกส์ / DMC</h3>
+      <div class="goal">08.00–18.00 · หลักของวัน: ปล่อยรถตรงเวลา จ่ายตรงออเดอร์</div>
+      <div class="slots">
+        <div class="slot "><div class="sh">08.00–08.30</div><div class="sw">เปิดกะ ตรวจแผนจ่ายและคิวรถของวัน</div></div>
+        <div class="slot focus"><div class="sh">08.30–10.00</div><div class="sw">คุมรอบจ่ายเช้า + จุดตรวจก่อนจ่าย — ห้ามขัด</div></div>
+        <div class="slot "><div class="sh">10.00–11.00</div><div class="sw">เดินหน้างาน ดูอุณหภูมิและ shelf life</div></div>
+        <div class="slot round"><div class="sh">11.00–11.30</div><div class="sw">รอบอนุมัติที่ 1</div></div>
+        <div class="slot round"><div class="sh">11.30–12.00</div><div class="sw">ยืนยันเวลาปล่อยรถรอบบ่าย</div></div>
+        <div class="slot focus"><div class="sh">13.00–14.30</div><div class="sw">คุมรอบจ่ายบ่าย + จุดตรวจก่อนจ่าย — ห้ามขัด</div></div>
+        <div class="slot "><div class="sh">14.30–15.00</div><div class="sw">เคสเบี่ยงเบน — บันทึกและปิดในทะเบียน</div></div>
+        <div class="slot round"><div class="sh">15.00–15.30</div><div class="sw">รอบอนุมัติที่ 2</div></div>
+        <div class="slot "><div class="sh">15.30–16.30</div><div class="sw">PM รถตามรอบ + เตรียมรถสำรองพรุ่งนี้</div></div>
+        <div class="slot people"><div class="sh">16.30–17.30</div><div class="sw">★ สอนทีม + ปรับปรุงงานหน้างาน</div></div>
+        <div class="slot "><div class="sh">17.30–18.00</div><div class="sw">ส่งต่อกะ + สรุปวัน</div></div>
+      </div>
+    </div>
+    <div class="day">
+      <h3>รักษาการ ผจก.การตลาดออนไลน์</h3>
+      <div class="goal">08.00–18.00 · หลักของวัน: ตอบลูกค้าจบในแชทเดียว</div>
+      <div class="slots">
+        <div class="slot "><div class="sh">08.00–08.20</div><div class="sw">เปิดวัน ดูสถานะออเดอร์และสต็อกเอง</div></div>
+        <div class="slot "><div class="sh">08.20–10.00</div><div class="sw">ตอบแชทลูกค้า รอบเช้า</div></div>
+        <div class="slot focus"><div class="sh">10.00–11.00</div><div class="sw">วางแผน / ผลิตคอนเทนต์ — ห้ามขัด</div></div>
+        <div class="slot round"><div class="sh">11.00–11.30</div><div class="sw">รอบอนุมัติที่ 1 — เฉพาะที่เกินกรอบโปรฯ</div></div>
+        <div class="slot "><div class="sh">11.30–12.00</div><div class="sw">ตรวจคอนเทนต์ทีม</div></div>
+        <div class="slot "><div class="sh">13.00–14.30</div><div class="sw">ตอบแชทลูกค้า รอบบ่าย</div></div>
+        <div class="slot "><div class="sh">14.30–15.00</div><div class="sw">ยิงแอด + ดูผลแคมเปญ</div></div>
+        <div class="slot round"><div class="sh">15.00–15.30</div><div class="sw">รอบอนุมัติที่ 2</div></div>
+        <div class="slot focus"><div class="sh">15.30–16.30</div><div class="sw">วางโปรโมชั่นเดือนถัดไปในกรอบที่อนุมัติไว้ — ห้ามขัด</div></div>
+        <div class="slot "><div class="sh">16.30–17.30</div><div class="sw">ประสานงานขาย — รวบคำถามเป็นรอบเดียว</div></div>
+        <div class="slot "><div class="sh">17.30–18.00</div><div class="sw">สรุปวัน</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="legend">
+    <i><span class="lg focus"></span> บล็อกห้ามขัด — งานสร้างยอด/สร้างคน</i>
+    <i><span class="lg round"></span> รอบตัดรอบ — อนุมัติ, Cut-off, มอบเคส</i>
+    <i><span class="lg people"></span> ★ เปิดโต๊ะหารือ / สอนทีม</i>
+    <i><span class="lg"></span> งานประจำตามหน้าที่</i>
+  </div>
+  <div class="note">ตารางนี้เป็นข้อเสนอตั้งต้น ไม่ใช่ตารางที่ตกลงแล้ว — เจ้าของตำแหน่งควรทวนก่อนว่าช่วงไหนชนกับรอบงานจริง เช่น รอบปล่อยรถ รอบโหลดตู้ หรือเวลาที่ลูกค้าสะดวกรับสาย แล้วค่อยล็อกเป็นข้อตกลงของทีม</div>
 </section>
 
 <section id="matrix" class="panel" role="tabpanel" aria-labelledby="tab-matrix">
